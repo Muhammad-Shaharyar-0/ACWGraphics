@@ -1,0 +1,15 @@
+﻿  Sample3DSceneRenderer.cpp
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(80,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(81,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1341,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1341,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1345,21): warning C4018: '<': signed/unsigned mismatch
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1387,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1390,21): warning C4018: '<': signed/unsigned mismatch
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1432,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\HLSL-Graphics-Effects\ACW\Content\Sample3DSceneRenderer.cpp(1435,21): warning C4018: '<': signed/unsigned mismatch
+  ACW.vcxproj -> C:\HLSL-Graphics-Effects\Debug\ACW\ACW.exe
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(841,5): warning : Certificate file does not exist: ACW_TemporaryKey.pfx
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0104: Certificate file 'ACW_TemporaryKey.pfx' not found.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0102: A certificate with thumbprint '5A41F423FAF0E6AFCBFAF379964AA9A42A7A07C1' that is specified in the project cannot be found in the certificate store. Please specify a valid thumbprint in the project file.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0107: The certificate specified is not valid for signing. For more information about valid certificates, see http://go.microsoft.com/fwlink/?LinkID=241478.

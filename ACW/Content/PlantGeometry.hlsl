@@ -45,7 +45,7 @@ void main(point GeometryShaderInput input[1], inout TriangleStream<PixelShaderIn
 		//vPos = mul(vPos, model);
 		vPos = mul(vPos, view);
 
-		float quadSize = 0.1;
+		float quadSize = 0.5;
 
 		//Vertex 1
 		output.position = vPos + float4(quadSize * QuadPos[0], 0.0);

@@ -2,14 +2,14 @@
 static float nearPlane = 1.0;
 static float farPlane = 1000.0;
 
-static float4 lightColour = float4(1, 1, 1, 1);
+static float4 lightColour = float4(0.2, 0.4, 0.7, 1);
 static float3 lightPos = float3(-10, 100, -10);
 static float4 backgroundColour = float4(0.1, 0.1, 0.1, 1);
 
-static float4 sphereColour1 = float4(1, 0, 0, 1); 
-static float4 sphereColour2 = float4(0, 1, 0, 1); 
-static float4 sphereColour3 = float4(1, 0, 1, 1); 
-static float shininess = 40;
+static float4 sphereColour1 = float4(1, 1, 1, 1); 
+static float4 sphereColour2 = float4(1, 1, 1, 1); 
+static float4 sphereColour3 = float4(1, 1, 1, 1); 
+static float shininess = 60;
 
 
 #define NOBJECTS 3
@@ -34,9 +34,9 @@ struct Sphere
 };
 
 static Sphere spheres[NOBJECTS] = {
-	{ 0.0, 1.0, 0.0, 1.0, sphereColour1, 0.3, 0.5, 0.7, shininess },
-	{ 0.0, 3.0, 0.0, 0.25, sphereColour2, 0.5, 0.7, 0.4, shininess },
-	{ -2.5, 1.0, 0.0, 2, sphereColour3, 0.5, 0.3, 0.3, shininess }
+	{ 2.0, -5.0, 0.0, 0.01, sphereColour1, 0.3, 0.5, 0.7, shininess },
+	{ 0.0, -5.0, 0.0, 0.01, sphereColour2, 0.5, 0.7, 0.7, shininess },
+	{ -2.5, -5.0, 0.0, 0.01, sphereColour3, 0.5, 0.3, 0.7, shininess }
 };
 
 struct Ray

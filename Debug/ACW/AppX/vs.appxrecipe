@@ -10,14 +10,14 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>13a25831-02da-49ed-92c9-bd6145e5fbf4</PackageIdentityName>
     <PackageIdentityPublisher>CN=User</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\HLSL-Graphics-Effects\ACW\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\HLSL-Graphics-Effects\Debug\ACW\AppX</LayoutDir>
+    <LayoutDir>C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\AppX</LayoutDir>
     <RegisteredManifestChecksum>FF4F8D0C3776B8BDB6B0B9CA68AB0A7D7DD07BFA1B5129487435FE3797DDA926</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>13a25831-02da-49ed-92c9-bd6145e5fbf4_1.0.0.0_x86__4sdaedqydyjdm</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>13a25831-02da-49ed-92c9-bd6145e5fbf4_4sdaedqydyjdm!App</RegisteredUserModeAppID>
@@ -26,164 +26,164 @@
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\HLSL-Graphics-Effects\Debug\ACW\AppxManifest.xml">
+    <AppXManifest Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-23T19:35:24.134</Modified>
+      <Modified>2023-07-23T23:06:10.885</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ACW.exe">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ACW.exe">
       <PackagePath>ACW.exe</PackagePath>
-      <Modified>2023-07-23T19:35:23.900</Modified>
+      <Modified>2023-07-23T22:31:07.092</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ACW.winmd">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ACW.winmd">
       <PackagePath>ACW.winmd</PackagePath>
       <Modified>2023-07-23T18:47:59.196</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ImplicitPrimitivesPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ImplicitPrimitivesPixel.cso">
       <PackagePath>ImplicitPrimitivesPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:45.148</Modified>
+      <Modified>2023-07-23T22:14:19.051</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ImplicitPrimitivesVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ImplicitPrimitivesVertex.cso">
       <PackagePath>ImplicitPrimitivesVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:45.321</Modified>
+      <Modified>2023-07-23T22:14:19.189</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ImplicitShapesPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ImplicitShapesPixel.cso">
       <PackagePath>ImplicitShapesPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.225</Modified>
+      <Modified>2023-07-23T22:14:19.980</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ImplicitShapesVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ImplicitShapesVertex.cso">
       <PackagePath>ImplicitShapesVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.347</Modified>
+      <Modified>2023-07-23T22:14:20.130</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\PlantGeometry.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\PlantGeometry.cso">
       <PackagePath>PlantGeometry.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.478</Modified>
+      <Modified>2023-07-23T23:06:10.615</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\PlantPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\PlantPixel.cso">
       <PackagePath>PlantPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.606</Modified>
+      <Modified>2023-07-23T22:14:20.428</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\PlantVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\PlantVertex.cso">
       <PackagePath>PlantVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.739</Modified>
+      <Modified>2023-07-23T22:14:20.570</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SamplePixelShader.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SamplePixelShader.cso">
       <PackagePath>SamplePixelShader.cso</PackagePath>
-      <Modified>2023-07-23T18:47:46.876</Modified>
+      <Modified>2023-07-23T22:14:20.721</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SampleVertexShader.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
-      <Modified>2023-07-23T18:47:47.003</Modified>
+      <Modified>2023-07-23T22:14:20.849</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ShinySphereRayTracerPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ShinySphereRayTracerPixel.cso">
       <PackagePath>ShinySphereRayTracerPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:47.216</Modified>
+      <Modified>2023-07-23T22:56:57.872</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\ShinySphereRayTracerVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ShinySphereRayTracerVertex.cso">
       <PackagePath>ShinySphereRayTracerVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:47.341</Modified>
+      <Modified>2023-07-23T22:38:37.143</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\FractalsPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\FractalsPixel.cso">
       <PackagePath>FractalsPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:47.935</Modified>
+      <Modified>2023-07-23T22:14:21.808</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\FractalsVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\FractalsVertex.cso">
       <PackagePath>FractalsVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.066</Modified>
+      <Modified>2023-07-23T22:14:21.929</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakeGeometry.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakeGeometry.cso">
       <PackagePath>SnakeGeometry.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.207</Modified>
+      <Modified>2023-07-23T22:14:22.090</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakeGeometry2.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakeGeometry2.cso">
       <PackagePath>SnakeGeometry2.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.349</Modified>
+      <Modified>2023-07-23T22:14:22.240</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakePixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakePixel.cso">
       <PackagePath>SnakePixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.489</Modified>
+      <Modified>2023-07-23T22:14:22.378</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakePixel2.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakePixel2.cso">
       <PackagePath>SnakePixel2.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.631</Modified>
+      <Modified>2023-07-23T22:14:22.515</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakeVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakeVertex.cso">
       <PackagePath>SnakeVertex.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.762</Modified>
+      <Modified>2023-07-23T22:14:22.645</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\SnakeVertex2.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\SnakeVertex2.cso">
       <PackagePath>SnakeVertex2.cso</PackagePath>
-      <Modified>2023-07-23T18:47:48.898</Modified>
+      <Modified>2023-07-23T22:14:22.774</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\TerrainDomain.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\TerrainDomain.cso">
       <PackagePath>TerrainDomain.cso</PackagePath>
-      <Modified>2023-07-23T19:15:19.138</Modified>
+      <Modified>2023-07-23T22:14:22.921</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\TerrainHull.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\TerrainHull.cso">
       <PackagePath>TerrainHull.cso</PackagePath>
-      <Modified>2023-07-23T18:47:49.188</Modified>
+      <Modified>2023-07-23T22:14:23.039</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\TerrainPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\TerrainPixel.cso">
       <PackagePath>TerrainPixel.cso</PackagePath>
-      <Modified>2023-07-23T19:13:35.736</Modified>
+      <Modified>2023-07-23T22:22:02.958</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\TerrainVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\TerrainVertex.cso">
       <PackagePath>TerrainVertex.cso</PackagePath>
-      <Modified>2023-07-23T19:20:48.969</Modified>
+      <Modified>2023-07-23T22:14:23.303</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\WaterDomain.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\WaterDomain.cso">
       <PackagePath>WaterDomain.cso</PackagePath>
-      <Modified>2023-07-23T19:31:41.943</Modified>
+      <Modified>2023-07-23T22:14:23.438</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\WaterHull.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\WaterHull.cso">
       <PackagePath>WaterHull.cso</PackagePath>
-      <Modified>2023-07-23T18:47:49.738</Modified>
+      <Modified>2023-07-23T22:14:23.568</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\WaterPixel.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\WaterPixel.cso">
       <PackagePath>WaterPixel.cso</PackagePath>
-      <Modified>2023-07-23T18:47:49.875</Modified>
+      <Modified>2023-07-23T22:14:23.691</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\WaterVertex.cso">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\WaterVertex.cso">
       <PackagePath>WaterVertex.cso</PackagePath>
-      <Modified>2023-07-23T19:22:26.648</Modified>
+      <Modified>2023-07-23T22:14:23.819</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACW\grass.dds">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\ACW\grass.dds">
       <PackagePath>grass.dds</PackagePath>
       <Modified>2019-04-23T11:45:19.000</Modified>
     </AppxPackagedFile>
@@ -191,7 +191,7 @@
       <PackagePath>ucrtbased.dll</PackagePath>
       <Modified>2020-12-02T03:59:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\Debug\ACW\resources.pri">
+    <AppxPackagedFile Include="C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <Modified>2023-07-23T18:48:01.065</Modified>
     </AppxPackagedFile>

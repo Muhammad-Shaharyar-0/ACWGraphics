@@ -65,7 +65,7 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 
 	//Set light pos and colour
 	DirectX::XMVECTOR lightPos = { -10, 100, -10, 1 };
-	DirectX::XMVECTOR lightColour = { 1, 1, 1, 1 };
+	DirectX::XMVECTOR lightColour = { .2, .3, 0.6, 1 };
 	XMStoreFloat4(&mConstantBufferDataLight.lightPos, lightPos);
 	XMStoreFloat4(&mConstantBufferDataLight.lightColour, lightColour);
 }
@@ -214,13 +214,14 @@ void Sample3DSceneRenderer::Render()
 	mContext->OMSetDepthStencilState(mDepthLessThanEqualAll.Get(), 0);
 
 	//Draw ray casted effects
-	//DrawSpheres();
+	DrawSpheres();
+
 	//DrawImplicitShapes();
 	//DrawImplicitPrimitives();
 	//DrawFractals();
 
 	//Set linelist topology and draw snakes
-	//mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 	//DrawSnakes();
 
 	//Set control point patchlist topology and draw terrain and water

@@ -302,6 +302,7 @@ void Sample3DSceneRenderer::Render()
 	DrawPlants();
 
 
+	DrawUnderWaterEffect();
 
 
 
@@ -368,7 +369,7 @@ void ACW::Sample3DSceneRenderer::DrawUnderWaterEffect()
 	ID3D11RenderTargetView* const targets[1] = { m_deviceResources->GetBackBufferRenderTargetView() };
 
 	mContext->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());// Disable the render target
-	mContext->IASetInputLayout(nullptr);
+	mContext->IASetInputLayout(m_inputLayout.Get());
 	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 

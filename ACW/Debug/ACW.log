@@ -4,13 +4,13 @@ F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(95,56): warning C4244: '=':
 F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(96,57): warning C4244: '=': conversion from 'float' to 'UINT', possible loss of data
 F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(139,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(140,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1430,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1430,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1434,21): warning C4018: '<': signed/unsigned mismatch
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1476,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1479,21): warning C4018: '<': signed/unsigned mismatch
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1521,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1524,21): warning C4018: '<': signed/unsigned mismatch
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1431,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1431,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1435,21): warning C4018: '<': signed/unsigned mismatch
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1477,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1480,21): warning C4018: '<': signed/unsigned mismatch
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1522,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1525,21): warning C4018: '<': signed/unsigned mismatch
   ACW.vcxproj -> F:\ACWGraphics\Debug\ACW\ACW.exe
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(841,5): warning : Certificate file does not exist: ACW_TemporaryKey.pfx
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0104: Certificate file 'ACW_TemporaryKey.pfx' not found.

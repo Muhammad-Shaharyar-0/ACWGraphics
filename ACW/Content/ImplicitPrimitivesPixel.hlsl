@@ -106,6 +106,7 @@ float sdRoundCone(in float3 p, in float r1, float r2, float h)
 }
 
 float dot2(in float3 v) { return dot(v, v); }
+
 float sdRoundCone(float3 p, float3 a, float3 b, float r1, float r2)
 {
 	// sampling independent computations (only depend on shape)
@@ -310,55 +311,14 @@ float softMin2(float x, float y, float a)
 float2 map(in float3 inPos)
 {
 	float3 pos = inPos;
-	pos.x += 4;
-	pos.y += -4;
-	pos.z += 4;
+	pos.x += 0;
+	pos.y += 4;
+	pos.z += 0;
 
 	float2 res = float2(1e10, 0.0);
 
-	if (pos.x < -0.5)
-	{
-		res = opU(res, float2(opS(
-			sdRoundBox(pos - float3(-2.0, 0.2, 1.0), float3(0.15, 0.15, 0.15), 0.05),
-			sdSphere(pos - float3(-2.0, 0.2, 1.0), 0.25)), 13.0));
-		res = opU(res, float2(opS(
-			sdTorus82(pos - float3(-2.0, 0.2, 0.0), float2(0.20, 0.1)),
-			sdCylinder(
-				opRep(float3(atan2(pos.x + 2.0, pos.z) / 6.2831, pos.y, 0.02 + 0.5*length(pos - float3(-2.0, 0.2, 0.0))), float3(0.05, 1.0, 0.05)), float2(0.02, 0.6))), 51.0));
-		res = opU(res, float2(0.5*sdSphere(pos - float3(-2.0, 0.25, -1.0), 0.2) + 0.03*sin(45.0*pos.x)*sin(45.0*pos.y)*sin(45.0*pos.z), 65.0));
-		res = opU(res, float2(0.6*sdTorus(
-			opTwist(pos - float3(-2.0, 0.25, 2.0)), float2(0.20, 0.05)), 46.7));
-		res = opU(res, float2(sdRoundCone(pos - float3(-2.0, 0.20, -2.0), 0.2, 0.1, 0.3), 23.56));
-	}
-	if (pos.x > -2.5 && pos.x < 0.5)
-	{
-		res = opU(res, float2(sdTriPrism(pos - float3(-1.0, 0.25, -1.0), float2(0.25, 0.05)), 43.5));
-		res = opU(res, float2(sdTorus88(pos - float3(-1.0, 0.25, 2.0), float2(0.20, 0.05)), 43.0));
-		res = opU(res, float2(sdHexPrism(pos - float3(-1.0, 0.20, 1.0), float2(0.25, 0.05)), 17.0));
-		res = opU(res, float2(sdOctahedron(pos - float3(-1.0, 0.15, -2.0), 0.35), 37.0));
-		res = opU(res, float2(sdEllipsoid(pos - float3(-1.0, 0.30, 0.0), float3(0.2, 0.25, 0.05)), 43.17));
-	}
-	if (pos.x > -1.5 && pos.x < 1.5)
-	{
-		res = opU(res, float2(sdSphere(pos - float3(0.0, 0.25, 0.0), 0.25), 46.9));
-		res = opU(res, float2(sdTorus(pos - float3(0.0, 0.25, 1.0), float2(0.20, 0.05)), 25.0));
-		res = opU(res, float2(sdCone(pos - float3(0.0, 0.50, -1.0), float3(0.8, 0.6, 0.3)), 55.0));
-		res = opU(res, float2(sdTorus82(pos - float3(0.0, 0.25, 2.0), float2(0.20, 0.05)), 50.0));
-		res = opU(res, float2(sdCappedCone(pos - float3(0.0, 0.35, -2.0), 0.15, 0.2, 0.1), 13.67));
-	}
-	if (pos.x > -0.5 && pos.x < 2.5)
-	{
-		res = opU(res, float2(sdBox(pos - float3(1.0, 0.25, 0.0), float3(0.25, 0.25, 0.25)), 3.0));
-		res = opU(res, float2(sdRoundBox(pos - float3(1.0, 0.25, 1.0), float3(0.15, 0.15, 0.15), 0.1), 41.0));
-		res = opU(res, float2(sdCapsule(pos - float3(1.0, 0.00, -2.0), float3(-0.1, 0.1, -0.1), float3(0.2, 0.4, 0.2), 0.1), 31.9));
-		res = opU(res, float2(sdCylinder(pos - float3(1.0, 0.30, -1.0), float2(0.1, 0.2)), 8.0));
-		res = opU(res, float2(sdCylinder6(pos - float3(1.0, 0.30, 2.0), float2(0.1, 0.2)), 12.0));
-	}
-	if (pos.x > 0.5)
-	{
-		res = opU(res, float2(sdCylinder(pos - float3(2.0, 0.20, -1.0), float3(0.1, -0.1, 0.0), float3(-0.1, 0.3, 0.1), 0.08), 31.2));
-		res = opU(res, float2(sdRoundCone(pos - float3(2.0, 0.20, -2.0), float3(0.1, 0.0, 0.0), float3(-0.1, 0.3, 0.1), 0.15, 0.05), 51.7));
-	}
+	res = opU(res, float2(0.5 * sdSphere(pos - float3(-2.0, 0.25, -1.0), 0.2) + 0.03 * sin(45.0 * pos.x) * sin(45.0 * pos.y) * sin(45.0 * pos.z), 65.0));
+
 	return res;
 }
 

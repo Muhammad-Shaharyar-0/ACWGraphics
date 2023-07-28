@@ -1,5 +1,17 @@
-﻿  compilation object save succeeded; see C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\PlantGeometry.cso
-  ACW.vcxproj -> C:\HLSL-Graphics-Effects\ACWGraphics\Debug\ACW\ACW.exe
+﻿  Sample3DSceneRenderer.cpp
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(74,51): warning C4305: 'initializing': truncation from 'double' to 'float'
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(95,56): warning C4244: '=': conversion from 'float' to 'UINT', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(96,57): warning C4244: '=': conversion from 'float' to 'UINT', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(139,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(140,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1430,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1430,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1434,21): warning C4018: '<': signed/unsigned mismatch
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1476,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1479,21): warning C4018: '<': signed/unsigned mismatch
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1521,63): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1524,21): warning C4018: '<': signed/unsigned mismatch
+  ACW.vcxproj -> F:\ACWGraphics\Debug\ACW\ACW.exe
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(841,5): warning : Certificate file does not exist: ACW_TemporaryKey.pfx
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0104: Certificate file 'ACW_TemporaryKey.pfx' not found.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0102: A certificate with thumbprint '5A41F423FAF0E6AFCBFAF379964AA9A42A7A07C1' that is specified in the project cannot be found in the certificate store. Please specify a valid thumbprint in the project file.

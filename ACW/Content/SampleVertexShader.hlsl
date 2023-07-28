@@ -1,39 +1,43 @@
 // A constant buffer that stores the three basic column-major matrices for composing geometry.
-cbuffer fmodelViewProjectionConstantBuffer : register(b0)
+cbuffer modelViewProjectionConstantBuffer : register(b0)
 {
-	matrix fmodel;
+	matrix model;
 	matrix view;
 	matrix projection;
+	float4 eye;
+	float4 lookAt;
+	float4 upDir;
 };
-
 // Per-vertex data used as input to the vertex shader.
 struct VertexShaderInput
 {
 	float3 pos : POSITION;
-	float3 color : COLOR0;
 };
 
-// Per-pixel color data passed through the pixel shader.
-struct PixelShaderInput
+struct VertexOutput
 {
-	float4 pos : SV_POSITION;
-	float3 color : COLOR0;
+	float4 position : SV_POSITION;
+	float3 cameraPosition : TEXCOORD0; // Output the camera position in world space
 };
 
 // Simple shader to do vertex processing on the GPU.
-PixelShaderInput main(VertexShaderInput input)
+VertexOutput main(VertexShaderInput input)
 {
-	PixelShaderInput output;
-	float4 pos = float4(input.pos, 1.0f);
+	
+	VertexOutput output;
 
-	// Transform the vertex position into projected space.
-	pos = mul(pos, fmodel);
-	pos = mul(pos, view);
-	pos = mul(pos, projection);
-	output.pos = pos;
+	//float4 pos = float4(input.pos, 1.0f);
 
-	// Pass the color through without fmodification.
-	output.color = input.color;
+	//// Transform the vertex position into projected space.
+	//pos = mul(pos, model);
+	//pos = mul(pos, view);
+	//pos = mul(pos, projection);
+
+	//output.position = pos;
+
+
+	output.position = float4(input.pos, 1.0f);
+	output.cameraPosition = eye.xyz;
 
 	return output;
 }

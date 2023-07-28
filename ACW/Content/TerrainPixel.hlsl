@@ -101,5 +101,21 @@ float4 main(PixelShaderInput input) : SV_TARGET
 
 	finalColour = saturate(ambientColour + (diffuseColour * materialDiffuse) + (specularColour * materialSpecular));
 
-	return saturate(finalColour * texColour);
+	// Calculate the distance from the camera (view position) to the pixel being rendered.
+	float4 fogColor = (0.5f, 0.5f, 0.5f, 1.0f); // Gray fog color
+	float fogStartDistance = 15.0f; // Start of fog effect at 10 units from the camera
+	float fogEndDistance = 100.0f;   // End of fog effect at 50 units from the camera
+
+	float viewDistance = length(input.posWorld);
+
+	// Calculate the fog factor using the view distance and the fog start and end distances.
+	float fogFactor = saturate((viewDistance - fogStartDistance) / (fogEndDistance - fogStartDistance));
+
+	// Interpolate the fog color with the original pixel color.
+	finalColour = saturate(finalColour* texColour);
+
+	float4 finalColor = lerp(finalColour, fogColor, fogFactor);
+
+
+	return finalColor;
 }

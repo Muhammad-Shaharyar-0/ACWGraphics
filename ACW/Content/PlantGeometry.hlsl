@@ -24,6 +24,7 @@ struct PixelShaderInput
 {
 	float4 position : SV_POSITION;
 	float2 uv : TEXCOORD0;
+	float4 posWorld : TEXCOORD2;
 };
 
 static const float3 QuadPos[4] = 
@@ -33,6 +34,7 @@ static const float3 QuadPos[4] =
 	float3(1, 1, 0),
 	float3(1, -1, 0),
 };
+
 
 [maxvertexcount(6)]
 void main(point GeometryShaderInput input[1], inout TriangleStream<PixelShaderInput> OutputStream)

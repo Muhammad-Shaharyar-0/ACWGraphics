@@ -21,13 +21,11 @@ namespace ACW
 
 	private:
 		void DrawSpheres();
-		void DrawImplicitShapes();
 		void DrawImplicitPrimitives();
-		void DrawFractals();
 		void DrawTerrain();
 		void DrawPlants();
-		void DrawSnakes();
 		void DrawWater();
+		void DrawUnderWaterEffect();
 
 		void CreateBuffers();
 		void SetBuffers();
@@ -37,18 +35,22 @@ namespace ACW
 		void CreateDepthStencils();
 		void CreateRasteriserStates();
 		void CreateSamplerState();
-
+		void CreateUnderwaterRenderTarget();
 	private:
 		//Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext3> mContext;
 
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mUnderwaterTexture;
+	
 		//Input layout for vertex data
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>	m_inputLayout;
-
+		
 		//Cube vertices/indices
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_vertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> m_fullScreenQuadVertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> m_fullScreenQuadIndexBuffer;
 
 		//Plant vertices/indices
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mPlantVertexBuffer;
@@ -82,6 +84,10 @@ namespace ACW
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderPlants;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderPlants;
 		Microsoft::WRL::ComPtr<ID3D11GeometryShader> mGeometryShaderPlants;
+
+		//Underwater shaders
+		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderUnderwater;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderUnderwater;
 
 		//Snake shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderSnakes;

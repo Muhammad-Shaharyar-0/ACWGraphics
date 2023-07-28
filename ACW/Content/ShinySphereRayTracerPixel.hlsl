@@ -239,5 +239,6 @@ PixelShaderOutput main(VS_QUAD input)
 
 	output.colour = RayTracing(eyeRay);
 
+
 	return output;
 }

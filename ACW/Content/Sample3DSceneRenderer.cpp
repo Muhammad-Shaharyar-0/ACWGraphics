@@ -3,6 +3,12 @@
 
 #include "..\Common\DirectXHelper.h"
 
+#include <d3d11.h>
+#include <DirectXMath.h>
+#include <wrl/client.h>
+
+using namespace DirectX;
+using Microsoft::WRL::ComPtr;
 using namespace ACW;
 
 using namespace DirectX;
@@ -70,6 +76,59 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 	XMStoreFloat4(&mConstantBufferDataLight.lightColour, lightColour);
 }
 
+
+// Define member variables for the render target and shader resource views
+ComPtr<ID3D11Texture2D> m_underwaterRenderTarget;
+ComPtr<ID3D11RenderTargetView> m_underwaterRenderTargetView;
+ComPtr<ID3D11ShaderResourceView> m_underwaterTextureSRV;
+
+// Add a new function to create the underwater render target view and shader resource view
+void Sample3DSceneRenderer::CreateUnderwaterRenderTarget()
+{
+	// Get the DXGI format used by the back buffer
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc;
+	m_deviceResources->GetSwapChain()->GetDesc1(&swapChainDesc);
+	DXGI_FORMAT backBufferFormat = swapChainDesc.Format;
+
+	// Create the underwater render target texture
+	D3D11_TEXTURE2D_DESC textureDesc = {};
+	textureDesc.Width = m_deviceResources->GetOutputSize().Width;
+	textureDesc.Height = m_deviceResources->GetOutputSize().Height;
+	textureDesc.MipLevels = 1;
+	textureDesc.ArraySize = 1;
+	textureDesc.Format = backBufferFormat;
+	textureDesc.SampleDesc.Count = 1;
+	textureDesc.SampleDesc.Quality = 0;
+	textureDesc.Usage = D3D11_USAGE_DEFAULT;
+	textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	textureDesc.CPUAccessFlags = 0;
+	textureDesc.MiscFlags = 0;
+
+	DX::ThrowIfFailed(
+		m_deviceResources->GetD3DDevice()->CreateTexture2D(&textureDesc, nullptr, m_underwaterRenderTarget.GetAddressOf())
+	);
+
+	// Create the underwater render target view
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	rtvDesc.Format = textureDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	rtvDesc.Texture2D.MipSlice = 0;
+
+	DX::ThrowIfFailed(
+		m_deviceResources->GetD3DDevice()->CreateRenderTargetView(m_underwaterRenderTarget.Get(), &rtvDesc, m_underwaterRenderTargetView.GetAddressOf())
+	);
+
+	// Create the underwater shader resource view
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = textureDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MostDetailedMip = 0;
+	srvDesc.Texture2D.MipLevels = 1;
+
+	DX::ThrowIfFailed(
+		m_deviceResources->GetD3DDevice()->CreateShaderResourceView(m_underwaterRenderTarget.Get(), &srvDesc, m_underwaterTextureSRV.GetAddressOf())
+	);
+}
 /// <summary>
 /// 
 /// </summary>
@@ -169,6 +228,7 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer, const std::vector
 	}
 }
 
+
 // Renders one frame using the vertex and pixel shaders.
 void Sample3DSceneRenderer::Render()
 {
@@ -177,6 +237,7 @@ void Sample3DSceneRenderer::Render()
 	{
 		return;
 	}
+
 
 	//Update buffer data
 	UpdateBuffers();
@@ -198,6 +259,7 @@ void Sample3DSceneRenderer::Render()
 		0
 	);
 
+
 	//Set triangle list topology
 	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -213,11 +275,17 @@ void Sample3DSceneRenderer::Render()
 	//Set depth stencil
 	mContext->OMSetDepthStencilState(mDepthLessThanEqualAll.Get(), 0);
 
+
+	// Bind the underwater render target view
+	ID3D11RenderTargetView* const targets[1] = { m_deviceResources->GetBackBufferRenderTargetView() };
+	mContext->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
+
+
 	//Draw ray casted effects
 	DrawSpheres();
 
 	//DrawImplicitShapes();
-	//DrawImplicitPrimitives();
+	DrawImplicitPrimitives();
 	//DrawFractals();
 
 	//Set linelist topology and draw snakes
@@ -233,6 +301,16 @@ void Sample3DSceneRenderer::Render()
 	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	DrawPlants();
 
+
+
+
+
+	// Step 3: Rendering to the Screen
+//	mContext->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
+	// Render the entire scene again (with the underwater effect applied) to the back buffer
+
+
+	//m_deviceResources->Present();
 }
 
 /// <summary>
@@ -269,31 +347,76 @@ void ACW::Sample3DSceneRenderer::DrawSpheres()
 	);
 }
 
-/// <summary>
-/// 
-/// </summary>
-void ACW::Sample3DSceneRenderer::DrawImplicitShapes()
+void ACW::Sample3DSceneRenderer::DrawUnderWaterEffect()
 {
+	//// Step 2: Apply Underwater Effect
+	ID3D11DepthStencilState* prevDepthStencilState;
+	UINT prevStencilRef;
+	mContext->OMGetDepthStencilState(&prevDepthStencilState, &prevStencilRef);
+
+	// Create a custom depth stencil state that disables depth testing
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
+	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
+	depthStencilDesc.DepthEnable = FALSE; // Disable depth testing
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // Disable depth writing
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS; // You may need to change this based on your scene
+	// ... Set other parameters as needed ...
+	ID3D11DepthStencilState* underwaterDepthStencilState;
+	m_deviceResources->GetD3DDevice()->CreateDepthStencilState(&depthStencilDesc, &underwaterDepthStencilState);
+	mContext->OMSetDepthStencilState(underwaterDepthStencilState, 0);
+
+	ID3D11RenderTargetView* const targets[1] = { m_deviceResources->GetBackBufferRenderTargetView() };
+
+	mContext->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());// Disable the render target
+	mContext->IASetInputLayout(nullptr);
+	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+
+
+
+	//Setup cube vertices and indices
+	UINT stride = sizeof(Vertex);
+	UINT offset = 0;
+	mContext->IASetVertexBuffers(
+		0,
+		1,
+		m_fullScreenQuadVertexBuffer.GetAddressOf(),
+		&stride,
+		&offset
+	);
+
+	mContext->IASetIndexBuffer(
+		m_fullScreenQuadIndexBuffer.Get(),
+		DXGI_FORMAT_R16_UINT,
+		0
+	);
+
+	// Set the underwater texture as the pixel shader resource
+	mContext->PSSetShaderResources(0, 1, mUnderwaterTexture.GetAddressOf());
+	mContext->PSSetSamplers(0, 1, mSampler.GetAddressOf());
+
 	// Attach our vertex shader.
 	mContext->VSSetShader(
-		m_vertexShaderImplicitShapes.Get(),
+		mVertexShaderUnderwater.Get(),
 		nullptr,
 		0
 	);
 
 	// Attach our pixel shader.
 	mContext->PSSetShader(
-		m_pixelShaderImplicitShapes.Get(),
+		mPixelShaderUnderwater.Get(),
 		nullptr,
 		0
 	);
 
-	//Draw the objects.
+	// Draw the objects.
 	mContext->DrawIndexed(
-		m_indexCount,
+		6,
 		0,
 		0
 	);
+
+	mContext->OMSetDepthStencilState(prevDepthStencilState, prevStencilRef);
 }
 
 /// <summary>
@@ -323,32 +446,6 @@ void ACW::Sample3DSceneRenderer::DrawImplicitPrimitives()
 	);
 }
 
-/// <summary>
-/// 
-/// </summary>
-void ACW::Sample3DSceneRenderer::DrawFractals()
-{
-	// Attach our vertex shader.
-	mContext->VSSetShader(
-		mVertexShaderFractals.Get(),
-		nullptr,
-		0
-	);
-
-	// Attach our pixel shader.
-	mContext->PSSetShader(
-		mPixelShaderFractals.Get(),
-		nullptr,
-		0
-	);
-
-	//Draw the objects.
-	mContext->DrawIndexed(
-		m_indexCount,
-		0,
-		0
-	);
-}
 
 /// <summary>
 /// 
@@ -490,105 +587,6 @@ void ACW::Sample3DSceneRenderer::DrawPlants()
 	);
 }
 
-/// <summary>
-/// 
-/// </summary>
-void ACW::Sample3DSceneRenderer::DrawSnakes()
-{
-#pragma region Snake 1
-	// Each vertex is one instance of the Vertex struct.
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
-	mContext->IASetVertexBuffers(
-		0,
-		1,
-		mSnakeVertexBuffer.GetAddressOf(),
-		&stride,
-		&offset
-	);
-
-	mContext->IASetIndexBuffer(
-		mSnakeIndexBuffer.Get(),
-		DXGI_FORMAT_R16_UINT, // Each index is one 16-bit unsigned integer (short).
-		0
-	);
-
-	// Attach our vertex shader.
-	mContext->VSSetShader(
-		mVertexShaderSnakes.Get(),
-		nullptr,
-		0
-	);
-
-	// Attach our pixel shader.
-	mContext->PSSetShader(
-		mPixelShaderSnakes.Get(),
-		nullptr,
-		0
-	);
-
-	// Attach our geometry shader.
-	mContext->GSSetShader(
-		mGeometryShaderSnakes.Get(),
-		nullptr,
-		0
-	);
-
-	// Draw the objects.
-	mContext->DrawIndexed(
-		mSnakeIndex,
-		0,
-		0
-	);
-#pragma endregion
-
-#pragma region Snake2
-	// Each vertex is one instance of the Vertex struct.
-	stride = sizeof(Vertex);
-	offset = 0;
-	mContext->IASetVertexBuffers(
-		0,
-		1,
-		mSnakeVertexBuffer2.GetAddressOf(),
-		&stride,
-		&offset
-	);
-
-	mContext->IASetIndexBuffer(
-		mSnakeIndexBuffer2.Get(),
-		DXGI_FORMAT_R16_UINT, // Each index is one 16-bit unsigned integer (short).
-		0
-	);
-
-	// Attach our vertex shader.
-	mContext->VSSetShader(
-		mVertexShaderSnakes2.Get(),
-		nullptr,
-		0
-	);
-
-	// Attach our pixel shader.
-	mContext->PSSetShader(
-		mPixelShaderSnakes2.Get(),
-		nullptr,
-		0
-	);
-
-	// Attach our geometry shader.
-	mContext->GSSetShader(
-		mGeometryShaderSnakes2.Get(),
-		nullptr,
-		0
-	);
-
-	// Draw the objects.
-	mContext->DrawIndexed(
-		mSnakeIndex,
-		0,
-		0
-	);
-#pragma endregion
-}
 
 /// <summary>
 /// 
@@ -874,6 +872,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	CreateDepthStencils();
 	CreateRasteriserStates();
 	CreateSamplerState();
+	CreateUnderwaterRenderTarget();
 
 	//Load shaders asynchronously
 	//Implicit shapes shaders
@@ -904,6 +903,9 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	auto loadVSTaskPlants = DX::ReadDataAsync(L"PlantVertex.cso");
 	auto loadPSTaskPlants = DX::ReadDataAsync(L"PlantPixel.cso");
 	auto loadGSTaskPlants = DX::ReadDataAsync(L"PlantGeometry.cso");
+
+	auto loadVSTaskUnderwater = DX::ReadDataAsync(L"SampleVertexShader.cso");
+	auto loadPSTaskUnderwater = DX::ReadDataAsync(L"SamplePixelShader.cso");
 
 	//Snakes shaders
 	auto loadVSTaskSnakes = DX::ReadDataAsync(L"SnakeVertex.cso");
@@ -1256,6 +1258,44 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 			)
 		);
 	});
+
+	//auto loadUnderwaterTextureTask = DX::ReadDataAsync(L"grass.dds").then([this](const std::vector<byte>& fileData) {
+	//	DX::ThrowIfFailed(
+	//		CreateDDSTextureFromMemory(m_deviceResources->GetD3DDevice(), &fileData[0], fileData.size(), nullptr, mUnderwaterTexture.GetAddressOf())
+	//	);
+	//	});
+
+#pragma endregion
+#pragma region UnderWater
+
+	//After the vertex shader file is loaded, create the shader
+	auto UnderWaterVSTask = loadVSTaskUnderwater.then([this](const std::vector<byte>& fileData) {
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreateVertexShader(
+				&fileData[0],
+				fileData.size(),
+				nullptr,
+				&mVertexShaderUnderwater
+			)
+		);
+		});
+
+	//Load plant texture from file
+	auto loadUnderwaterTextureTask = CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"grass.dds", nullptr, mUnderwaterTexture.GetAddressOf());
+
+	//After the pixel shader file is loaded, create the shader
+	auto UnderWaterPSTask = loadPSTaskUnderwater.then([this](const std::vector<byte>& fileData) {
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreatePixelShader(
+				&fileData[0],
+				fileData.size(),
+				nullptr,
+				&mPixelShaderUnderwater
+			)
+		);
+		});
+
+
 #pragma endregion
 
 	//Once the shaders using the cube vertices are loaded, load the cube vertices
@@ -1328,6 +1368,54 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		);
 	});
 
+	auto createUnderWaterTask = (UnderWaterPSTask && UnderWaterVSTask).then([this]() {
+
+		// Full-screen quad vertices
+		const Vertex quadVertices[] =
+		{
+			{XMFLOAT3(-1.0f, -1.0f, 0.0f)},
+			{XMFLOAT3(-1.0f,  1.0f, 0.0f)},
+			{XMFLOAT3(1.0f, -1.0f, 0.0f)},
+			{XMFLOAT3(1.0f,  1.0f, 0.0f)},
+		};
+
+		// Full-screen quad indices
+		const unsigned short quadIndices[] =
+		{
+			0, 1, 2,
+			2, 1, 3,
+		};
+
+		// Create the vertex buffer for the full-screen quad
+		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
+		vertexBufferData.pSysMem = quadVertices;
+		vertexBufferData.SysMemPitch = 0;
+		vertexBufferData.SysMemSlicePitch = 0;
+		CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(quadVertices), D3D11_BIND_VERTEX_BUFFER);
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreateBuffer(
+				&vertexBufferDesc,
+				&vertexBufferData,
+				&m_fullScreenQuadVertexBuffer
+			)
+		);
+
+		// Create the index buffer for the full-screen quad
+		D3D11_SUBRESOURCE_DATA indexBufferData = { 0 };
+		indexBufferData.pSysMem = quadIndices;
+		indexBufferData.SysMemPitch = 0;
+		indexBufferData.SysMemSlicePitch = 0;
+		CD3D11_BUFFER_DESC indexBufferDesc(sizeof(quadIndices), D3D11_BIND_INDEX_BUFFER);
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreateBuffer(
+				&indexBufferDesc,
+				&indexBufferData,
+				&m_fullScreenQuadIndexBuffer
+			)
+		);
+			});
+
+
 
 	//Once the shaders using the plant vertices are loaded, load the plant vertices
 	auto createPlantsTask = (PlantsVSTask && PlantsPSTask && PlantsGSTask).then([this]() {
@@ -1335,9 +1423,9 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		static std::vector<Vertex> plantVertices;
 		static std::vector<unsigned short> plantIndices;
 
-		for (int i = -10; i < 11; i++)
+		for (int i = -20; i < 21; i++)
 		{
-			for (int j = -10; j < 11; j++)
+			for (int j = -20; j < 21; j++)
 			{
 				plantVertices.emplace_back(Vertex{ XMFLOAT3(i, 0, j) });
 			}

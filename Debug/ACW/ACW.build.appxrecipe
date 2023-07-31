@@ -37,20 +37,20 @@
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\CoralVertexShader.cso">
       <PackagePath>CoralVertexShader.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesPixel.cso">
-      <PackagePath>ImplicitPrimitivesPixel.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitCoralPixel.cso">
+      <PackagePath>ImplicitCoralPixel.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesVertex.cso">
-      <PackagePath>ImplicitPrimitivesVertex.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitCoralVertex.cso">
+      <PackagePath>ImplicitCoralVertex.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantGeometry.cso">
-      <PackagePath>PlantGeometry.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\GeometryCoralGeometry.cso">
+      <PackagePath>GeometryCoralGeometry.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantPixel.cso">
-      <PackagePath>PlantPixel.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\GeometryCoralPixel.cso">
+      <PackagePath>GeometryCoralPixel.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantVertex.cso">
-      <PackagePath>PlantVertex.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\GeometryCoralVertex.cso">
+      <PackagePath>GeometryCoralVertex.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SamplePixelShader.cso">
       <PackagePath>SamplePixelShader.cso</PackagePath>
@@ -58,11 +58,11 @@
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ShinySphereRayTracerPixel.cso">
-      <PackagePath>ShinySphereRayTracerPixel.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\BubblesPixel.cso">
+      <PackagePath>BubblesPixel.cso</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ShinySphereRayTracerVertex.cso">
-      <PackagePath>ShinySphereRayTracerVertex.cso</PackagePath>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\BubblesVertex.cso">
+      <PackagePath>BubblesVertex.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainDomain.cso">
       <PackagePath>TerrainDomain.cso</PackagePath>

@@ -47,31 +47,37 @@ float Hash(float2 grid)
 	return frac(sin(h)*43758.5453123);
 }
 
-float Noise(in float2 p) 
+float2 grad2(float2 p)
 {
-	float2 grid = floor(p);
-	float2 f = frac(p); 
-	float2 uv = f * f*(3.0 - 2.0*f);
-	float n1, n2, n3, n4; 
-	n1 = Hash(grid + float2(0.0, 0.0));
-	n2 = Hash(grid + float2(1.0, 0.0));
-	n3 = Hash(grid + float2(0.0, 1.0));
-	n4 = Hash(grid + float2(1.0, 1.0));
-	n1 = lerp(n1, n2, uv.x); 
-	n2 = lerp(n3, n4, uv.x); 
-	n1 = lerp(n1, n2, uv.y); 
-	return n1;
+	float4 h = float4(1.0, 2.0, 3.0, 4.0) + float4(dot(p, float2(127.1, 311.7)), dot(p, float2(269.5, 183.3)), dot(p, float2(419.2, 371.9)), dot(p, float2(371.9, 419.2)));
+	return frac(sin(h) * 43758.5453123);
 }
 
-float fractalNoise(in float2 xy) 
+float noise(float2 p)
 {
-	float w = .7;
-	float f = 0.0; 
-	for (int i = 0; i < 4; i++) 
-	{ 
-		f += Noise(xy) * w; w *= 0.5; xy *= 2.7;
+	float2 i = floor(p);
+	float2 f = frac(p);
+
+	float2 u = f * f * (3.0 - 2.0 * f);
+
+	return lerp(lerp(grad2(i + float2(0.0, 0.0)), grad2(i + float2(1.0, 0.0)), u.x),
+		lerp(grad2(i + float2(0.0, 1.0)), grad2(i + float2(1.0, 1.0)), u.x),
+		u.y) * 0.5 + 0.5;
+}
+
+float fractalNoise(float2 xy)
+{
+	float w = 0.7;
+	float f = 0.0;
+
+	for (int i = 0; i < 4; i++)
+	{
+		f += noise(xy) * w;
+		w *= 0.5;
+		xy *= 2.7;
 	}
-	return f; 
+
+	return f;
 }
 
 [domain("quad")]

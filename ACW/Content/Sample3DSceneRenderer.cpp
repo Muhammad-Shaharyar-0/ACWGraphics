@@ -42,7 +42,7 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 		fovAngleY *= 2.0f;
 	}
 
-	//Perspective matrix
+	// Perspective matrix
 	XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(
 		fovAngleY,
 		aspectRatio,
@@ -50,20 +50,13 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 		1000.0f
 	);
 
-	//Orientation matrix
-	XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
-
-	XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
-
-	//Projection matrix
-	XMStoreFloat4x4(
-		&m_constantBufferDataCamera.projection,
-		XMMatrixTranspose(perspectiveMatrix * orientationMatrix)
-	);
+	// Set projection matrix
+	XMStoreFloat4x4(&m_constantBufferDataCamera.projection, XMMatrixTranspose(perspectiveMatrix));
 
 	//Set view matrix
 	lookAt = XMMatrixLookAtLH(eye, at, up);
 	XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
+	
 
 	XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
 	XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
@@ -139,93 +132,71 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer, const std::vector
 	float dt = timer.GetElapsedSeconds();
 	mConstantBufferDataTime.time = timer.GetTotalSeconds();
 
-	//Forward,left,right,back
-	if (pInput[0] == true)
-	{
-		XMFLOAT4 translation(0, 0, 1.0f * dt, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+	XMFLOAT3 translation(0, 0, 0);
+	if (pInput[0])
+		translation.z = 1.0f * dt;
+	if (pInput[1])
+		translation.x = -1.0f * dt;
+	if (pInput[2])
+		translation.z = -1.0f * dt;
+	if (pInput[3])
+		translation.x = 1.0f * dt;
+	if (pInput[4])
+		translation.y = 1.0f * dt;
+	if (pInput[5])
+		translation.y = -1.0f * dt;
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
-		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
-	}
-	if (pInput[1] == true)
+	if (translation.x != 0 || translation.y != 0 || translation.z != 0)
 	{
-		XMFLOAT4 translation(-1.0f * dt, 0, 0, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+		XMVECTOR translationVector = XMLoadFloat3(&translation);
+		XMVECTOR eyeVector = XMLoadFloat4(&m_constantBufferDataCamera.eye);
+		XMVECTOR lookAtVector = XMLoadFloat4(&m_constantBufferDataCamera.lookAt);
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
-		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
-	}
-	if (pInput[2] == true)
-	{
-		XMFLOAT4 translation(0, 0, -1.0f * dt, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+		eyeVector += translationVector;
+		lookAtVector += translationVector;
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
-		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
-	}
-	if (pInput[3] == true)
-	{
-		XMFLOAT4 translation(1.0f * dt, 0, 0, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+		XMStoreFloat4(&m_constantBufferDataCamera.eye, eyeVector);
+		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, lookAtVector);
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
+		XMMATRIX lookAt = XMMatrixLookAtLH(eyeVector, lookAtVector, up);
 		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
 	}
 
-	//Up/Down
-	if (pInput[4] == true)
-	{
-		XMFLOAT4 translation(0.0f, 1.0f * dt, 0, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+	//// Rotation
+	//const float rotationSpeed = 1.0f; // Adjust this value for the rotation speed
+	//if (pInput[6])
+	//{
+	//	float yaw = rotationSpeed * dt; // Yaw rotation in radians
+	//	XMVECTOR eyeVector = XMLoadFloat4(&m_constantBufferDataCamera.eye);
+	//	XMVECTOR lookAtVector = XMLoadFloat4(&m_constantBufferDataCamera.lookAt);
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
-		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
-	}
-	if (pInput[5] == true)
-	{
-		XMFLOAT4 translation(0.0f, -1.0f * dt, 0, 1);
-		eye += XMLoadFloat4(&translation);
-		at += XMLoadFloat4(&translation);
-		XMStoreFloat4(&m_constantBufferDataCamera.eye, eye);
-		XMStoreFloat4(&m_constantBufferDataCamera.lookAt, at);
+	//	XMVECTOR viewDirection = lookAtVector - eyeVector;
+	//	XMMATRIX rotationMatrix = XMMatrixRotationY(yaw);
+	//	viewDirection = XMVector3TransformNormal(viewDirection, rotationMatrix);
+	//	lookAtVector = eyeVector + viewDirection;
 
-		lookAt = XMMatrixLookAtLH(eye, at, up);
-		XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
-	}
+	//	XMStoreFloat4(&m_constantBufferDataCamera.lookAt, lookAtVector);
 
-	//Rotation
-	if (pInput[6] == true)
-	{
+	//	XMMATRIX lookAt = XMMatrixLookAtLH(eyeVector, lookAtVector, up);
+	//	XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
+	//}
 
-	}
-	if (pInput[7] == true)
-	{
+	//if (pInput[7])
+	//{
+	//	float yaw = -rotationSpeed * dt; // Yaw rotation in radians
+	//	XMVECTOR eyeVector = XMLoadFloat4(&m_constantBufferDataCamera.eye);
+	//	XMVECTOR lookAtVector = XMLoadFloat4(&m_constantBufferDataCamera.lookAt);
 
-	}
-	if (pInput[8] == true)
-	{
+	//	XMVECTOR viewDirection = lookAtVector - eyeVector;
+	//	XMMATRIX rotationMatrix = XMMatrixRotationY(yaw);
+	//	viewDirection = XMVector3TransformNormal(viewDirection, rotationMatrix);
+	//	lookAtVector = eyeVector + viewDirection;
 
-	}
-	if (pInput[9] == true)
-	{
+	//	XMStoreFloat4(&m_constantBufferDataCamera.lookAt, lookAtVector);
 
-	}
+	//	XMMATRIX lookAt = XMMatrixLookAtLH(eyeVector, lookAtVector, up);
+	//	XMStoreFloat4x4(&m_constantBufferDataCamera.view, XMMatrixTranspose(lookAt));
+	//}
 }
 
 
@@ -455,14 +426,14 @@ void ACW::Sample3DSceneRenderer::DrawImplicitCoral()
 {
 	// Attach our vertex shader.
 	mContext->VSSetShader(
-		m_vertexShaderImplicitPrimitives.Get(),
+		m_vertexShaderImplicitCoral.Get(),
 		nullptr,
 		0
 	);
 
 	// Attach our pixel shader.
 	mContext->PSSetShader(
-		m_pixelShaderImplicitPrimitives.Get(),
+		m_pixelShaderImplicitCoral.Get(),
 		nullptr,
 		0
 	);
@@ -905,8 +876,14 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 
 	//Load shaders asynchronously
 	//Implicit primitives shaders
-	auto loadVSTaskPrimitives = DX::ReadDataAsync(L"ImplicitPrimitivesVertex.cso");
-	auto loadPSTaskPrimitives = DX::ReadDataAsync(L"ImplicitPrimitivesPixel.cso");
+	auto loadVSTaskPrimitives = DX::ReadDataAsync(L"ImplicitCoralVertex.cso");
+	auto loadPSTaskPrimitives = DX::ReadDataAsync(L"ImplicitCoralPixel.cso");
+
+	auto loadVSTaskUnderwater = DX::ReadDataAsync(L"SampleVertexShader.cso");
+	auto loadPSTaskUnderwater = DX::ReadDataAsync(L"SamplePixelShader.cso");
+
+	auto loadVSTaskVertexCoral = DX::ReadDataAsync(L"CoralVertexShader.cso");
+	auto loadPSTaskVertexCoral = DX::ReadDataAsync(L"CoralPixelShader.cso");
 
 	//Terrain shaders
 	auto loadVSTaskTerrain = DX::ReadDataAsync(L"TerrainVertex.cso");
@@ -920,20 +897,16 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	auto loadDSTaskWater = DX::ReadDataAsync(L"WaterDomain.cso");
 	auto loadHSTaskWater = DX::ReadDataAsync(L"WaterHull.cso");
 
-	//Shiny spheres shaders
-	auto loadVSTaskSpheres = DX::ReadDataAsync(L"ShinySphereRayTracerVertex.cso");
-	auto loadPSTaskSpheres = DX::ReadDataAsync(L"ShinySphereRayTracerPixel.cso");
+	//Bubbles shaders
+	auto loadVSTaskSpheres = DX::ReadDataAsync(L"BubblesVertex.cso");
+	auto loadPSTaskSpheres = DX::ReadDataAsync(L"BubblesPixel.cso");
 
 	//Plants shaders
-	auto loadVSTaskPlants = DX::ReadDataAsync(L"PlantVertex.cso");
-	auto loadPSTaskPlants = DX::ReadDataAsync(L"PlantPixel.cso");
-	auto loadGSTaskPlants = DX::ReadDataAsync(L"PlantGeometry.cso");
+	auto loadVSTaskPlants = DX::ReadDataAsync(L"GeometryCoralVertex.cso");
+	auto loadPSTaskPlants = DX::ReadDataAsync(L"GeometryCoralPixel.cso");
+	auto loadGSTaskPlants = DX::ReadDataAsync(L"GeometryCoralGeometry.cso");
 
-	auto loadVSTaskUnderwater = DX::ReadDataAsync(L"SampleVertexShader.cso");
-	auto loadPSTaskUnderwater = DX::ReadDataAsync(L"SamplePixelShader.cso");
 
-	auto loadVSTaskVertexCoral= DX::ReadDataAsync(L"CoralVertexShader.cso");
-	auto loadPSTaskVertexCoral = DX::ReadDataAsync(L"CoralPixelShader.cso");
 
 	
 
@@ -946,7 +919,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				&fileData[0],
 				fileData.size(),
 				nullptr,
-				&m_vertexShaderImplicitPrimitives
+				&m_vertexShaderImplicitCoral
 			)
 		);
 		//Input layout
@@ -973,7 +946,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				&fileData[0],
 				fileData.size(),
 				nullptr,
-				&m_pixelShaderImplicitPrimitives
+				&m_pixelShaderImplicitCoral
 			)
 		);
 	});
@@ -1082,7 +1055,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 
 #pragma endregion
 
-#pragma region Shiny Spheres
+#pragma region Bubbles
 	//After the vertex shader file is loaded, create the shader
 	auto SpheresVSTask = loadVSTaskSpheres.then([this](const std::vector<byte>& fileData) {
 		DX::ThrowIfFailed(

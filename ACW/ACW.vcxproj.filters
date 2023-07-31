@@ -81,19 +81,19 @@
     <FxCompile Include="Content\TerrainVertex.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\ShinySphereRayTracerPixel.hlsl">
+    <FxCompile Include="Content\BubblesPixel.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\ShinySphereRayTracerVertex.hlsl">
+    <FxCompile Include="Content\BubblesVertex.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\PlantGeometry.hlsl">
+    <FxCompile Include="Content\GeometryCoralGeometry.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\PlantPixel.hlsl">
+    <FxCompile Include="Content\GeometryCoralPixel.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\PlantVertex.hlsl">
+    <FxCompile Include="Content\GeometryCoralVertex.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
     <FxCompile Include="Content\WaterDomain.hlsl">
@@ -108,10 +108,10 @@
     <FxCompile Include="Content\WaterVertex.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\ImplicitPrimitivesPixel.hlsl">
+    <FxCompile Include="Content\ImplicitCoralPixel.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
-    <FxCompile Include="Content\ImplicitPrimitivesVertex.hlsl">
+    <FxCompile Include="Content\ImplicitCoralVertex.hlsl">
       <Filter>Content</Filter>
     </FxCompile>
     <FxCompile Include="Content\CoralVertexShader.hlsl" />

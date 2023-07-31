@@ -41,54 +41,59 @@ float Hash(float2 grid)
 	return frac(sin(h)*43758.5453123);
 }
 
-float Noise(in float2 p) 
+float Noise(in float2 p)
 {
-	float2 grid = floor(p);
-	float2 f = frac(p); 
-	float2 uv = f * f*(3.0 - 2.0*f);
-	float n1, n2, n3, n4; 
-	n1 = Hash(grid + float2(0.0, 0.0));
-	n2 = Hash(grid + float2(1.0, 0.0));
-	n3 = Hash(grid + float2(0.0, 1.0));
-	n4 = Hash(grid + float2(1.0, 1.0));
-	n1 = lerp(n1, n2, uv.x); 
-	n2 = lerp(n3, n4, uv.x); 
-	n1 = lerp(n1, n2, uv.y); 
-	return n1;
+    float2 grid = floor(p);
+    float2 f = frac(p);
+    float2 uv = f * f * (3.0 - 2.0 * f);
+    float n1, n2, n3, n4;
+    n1 = Hash(grid + float2(0.0, 0.0));
+    n2 = Hash(grid + float2(1.0, 0.0));
+    n3 = Hash(grid + float2(0.0, 1.0));
+    n4 = Hash(grid + float2(1.0, 1.0));
+    n1 = lerp(n1, n2, uv.x);
+    n2 = lerp(n3, n4, uv.x);
+    n1 = lerp(n1, n2, uv.y);
+    return n1;
 }
 
-float fractalNoise(in float2 xy) 
+float fractalNoise(in float2 xy)
 {
-	float w = .7;
-	float f = 0.0; 
-	for (int i = 0; i < 4; i++) 
-	{ 
-		f += Noise(xy) * w; w *= 0.5; xy *= 2.7;
-	}
-	return f; 
+    float w = .7;
+    float f = 0.0;
+    for (int i = 0; i < 4; i++)
+    {
+        f += Noise(xy) * w; w *= 0.5; xy *= 2.7;
+    }
+    return f;
 }
 
 [domain("quad")]
 PixelShaderInput main(Quad input, float2 UV : SV_DomainLocation, const OutputPatch<HullShaderOutput, 4> QuadPatch)
 {
-	PixelShaderInput output;
+    PixelShaderInput output;
 
-	float3 vPos1 = (1.0 - UV.y) * QuadPos[0].xyz + UV.y * QuadPos[1].xyz;
-	float3 vPos2 = (1.0 - UV.y) * QuadPos[2].xyz + UV.y * QuadPos[3].xyz; 
-	float3 uvPos = (1.0 - UV.x) * vPos1 + UV.x * vPos2;
+    static const float3 QuadPos[4] =
+    {
+        float3(-50, 0, 50),
+        float3(-50, 0, -50),
+        float3(50, 0, 50),
+        float3(50, 0, -50)
+    };
 
-	uvPos.y = fractalNoise(uvPos.xz);
+    float3 vPos1 = lerp(QuadPos[0], QuadPos[1], UV.y);
+    float3 vPos2 = lerp(QuadPos[2], QuadPos[3], UV.y);
+    float3 uvPos = lerp(vPos1, vPos2, UV.x);
 
-	float dYx = fractalNoise(uvPos.xz + float2(0.1, 0.0));
-	float dYz = fractalNoise(uvPos.xz + float2(0.0, 0.1));
+    uvPos.y = fractalNoise(uvPos.xz);
 
-	float3 N = normalize(float3(uvPos.y - dYx, 0.2, uvPos.y - dYz));
+    float3 dY = float3(fractalNoise(uvPos.xz + float2(0.1, 0.0)), 0.2, fractalNoise(uvPos.xz + float2(0.0, 0.1)));
 
-	output.norm = float4(N, 1.0);
-	output.posWorld = float4(uvPos, 1);
-	output.position = output.posWorld;
-	output.position = mul(output.position, view);
-	output.position = mul(output.position, projection);
+    float3 N = normalize(uvPos - dY);
 
-	return output;
+    output.norm = float4(N, 1.0);
+    output.posWorld = float4(uvPos, 1);
+    output.position = mul(output.posWorld, mul(view, projection));
+
+    return output;
 }

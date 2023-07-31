@@ -1,4 +1,15 @@
-﻿  compilation object save succeeded; see F:\ACWGraphics\Debug\ACW\CoralVertexShader.cso
+﻿  ACWMain.cpp
+  App.cpp
+  Sample3DSceneRenderer.cpp
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(67,51): warning C4305: 'initializing': truncation from 'double' to 'float'
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(88,56): warning C4244: '=': conversion from 'float' to 'UINT', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(89,57): warning C4244: '=': conversion from 'float' to 'UINT', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(132,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(133,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+F:\ACWGraphics\ACW\ACWMain.cpp(17,103): warning C4316: 'ACW::Sample3DSceneRenderer': object allocated on the heap may not be aligned 16
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1313,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1313,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+F:\ACWGraphics\ACW\Content\Sample3DSceneRenderer.cpp(1317,21): warning C4018: '<': signed/unsigned mismatch
   ACW.vcxproj -> F:\ACWGraphics\Debug\ACW\ACW.exe
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(841,5): warning : Certificate file does not exist: ACW_TemporaryKey.pfx
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VisualStudio\v16.0\AppxPackage\Microsoft.AppXPackage.Targets(2720,5): warning APPX0104: Certificate file 'ACW_TemporaryKey.pfx' not found.

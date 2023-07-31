@@ -28,29 +28,66 @@ float Hash(float2 grid)
 	return frac(sin(h)*43758.5453123);
 }
 
+#define NOISE_TABLE_SIZE 256
+
+// Precomputed noise lookup table
+static float g_NoiseTable[NOISE_TABLE_SIZE];
+
+// Initialize the noise lookup table
+void InitializeNoiseTable()
+{
+	for (int i = 0; i < NOISE_TABLE_SIZE; i++)
+	{
+		float2 grid = float2(floor(i), frac(i));
+		float2 f = frac(grid);
+		float2 uv = f * f * (3.0 - 2.0 * f);
+
+		int index00 = (int)grid.x + (int)grid.y * NOISE_TABLE_SIZE;
+		int index01 = index00 + 1;
+		int index10 = index00 + NOISE_TABLE_SIZE;
+		int index11 = index10 + 1;
+
+		float n1 = Hash(grid + float2(0.0, 0.0));
+		float n2 = Hash(grid + float2(1.0, 0.0));
+		float n3 = Hash(grid + float2(0.0, 1.0));
+		float n4 = Hash(grid + float2(1.0, 1.0));
+		n1 = lerp(n1, n2, uv.x);
+		n2 = lerp(n3, n4, uv.x);
+		g_NoiseTable[i] = lerp(n1, n2, uv.y);
+	}
+}
+
+// Compute noise using the precomputed lookup table
 float Noise(in float2 p)
 {
 	float2 grid = floor(p);
 	float2 f = frac(p);
-	float2 uv = f * f*(3.0 - 2.0*f);
-	float n1, n2, n3, n4;
-	n1 = Hash(grid + float2(0.0, 0.0));
-	n2 = Hash(grid + float2(1.0, 0.0));
-	n3 = Hash(grid + float2(0.0, 1.0));
-	n4 = Hash(grid + float2(1.0, 1.0));
+	float2 uv = f * f * (3.0 - 2.0 * f);
+
+	int index00 = (int)grid.x + (int)grid.y * NOISE_TABLE_SIZE;
+	int index01 = index00 + 1;
+	int index10 = index00 + NOISE_TABLE_SIZE;
+	int index11 = index10 + 1;
+
+	float n1 = g_NoiseTable[index00];
+	float n2 = g_NoiseTable[index01];
+	float n3 = g_NoiseTable[index10];
+	float n4 = g_NoiseTable[index11];
 	n1 = lerp(n1, n2, uv.x);
 	n2 = lerp(n3, n4, uv.x);
-	n1 = lerp(n1, n2, uv.y);
-	return n1;//2*(2.0*n1 -1.0);
+	return lerp(n1, n2, uv.y);
 }
 
+// fractalNoise remains unchanged
 float fractalNoise(in float2 xy)
 {
-	float w = .7;
+	float w = 0.7;
 	float f = 0.0;
 	for (int i = 0; i < 4; i++)
 	{
-		f += Noise(xy) * w; w *= 0.5; xy *= 2.7;
+		f += Noise(xy) * w;
+		w *= 0.5;
+		xy *= 2.7;
 	}
 	return f;
 }

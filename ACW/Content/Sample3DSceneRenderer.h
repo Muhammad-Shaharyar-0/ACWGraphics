@@ -20,33 +20,31 @@ namespace ACW
 		void Render();
 
 	private:
-		void DrawReflectiveBubbles();
-		void DrawVertexCoral();
-		void DrawImplicitCoral();
-		void DrawTerrain();
-		void DrawGeometryCorals();
-		void DrawWater();
-		void DrawUnderWaterEffect();
+		
+		//Constant buffers data
+		ModelViewProjectionConstantBuffer	m_constantBufferDataCamera;
+		LightConstantBuffer mConstantBufferDataLight;
+		TimeConstantBuffer mConstantBufferDataTime;
 
-		void CreateBuffers();
-		void SetBuffers();
-		void UpdateBuffers();
+		//Variables
+		uint32	m_indexCount;
+		uint32 mPlantIndex;
+		uint32 mSnakeIndex;
+		bool	m_loadingComplete;
+		DirectX::XMVECTOR eye = { 0, 5, -10, 1 };
+		DirectX::XMVECTOR at = { 0.0f, 5.0f, 1.0f, 0.0f };
+		DirectX::XMVECTOR up = { 0.0f, 1.0f, 0.0f, 0.0f };
+		DirectX::XMMATRIX lookAt;
 
-		void CreateBlendStates();
-		void CreateDepthStencils();
-		void CreateRasteriserStates();
-		void CreateSamplerState();
-		void CreateUnderwaterRenderTarget();
-	private:
 		//Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext3> mContext;
 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mUnderwaterTexture;
-	
+
 		//Input layout for vertex data
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>	m_inputLayout;
-		
+
 		//Cube vertices/indices
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_vertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_indexBuffer;
@@ -60,8 +58,8 @@ namespace ACW
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mPlantIndexBuffer;
 
 		//Implicit primitives shaders
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderImplicitPrimitives;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderImplicitPrimitives;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderImplicitCoral;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderImplicitCoral;
 
 		//Implicit primitives shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderVertexCoral;
@@ -113,20 +111,26 @@ namespace ACW
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		mConstantBufferLight;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		mConstantBufferTime;
 
-		//Constant buffers data
-		ModelViewProjectionConstantBuffer	m_constantBufferDataCamera;
-		LightConstantBuffer mConstantBufferDataLight;
-		TimeConstantBuffer mConstantBufferDataTime;
 
-		//Variables
-		uint32	m_indexCount;
-		uint32 mPlantIndex;
-		uint32 mSnakeIndex;
-		bool	m_loadingComplete;
-		DirectX::XMVECTOR eye = { 0, 5, -10, 1 };
-		DirectX::XMVECTOR at = { 0.0f, 5.0f, 1.0f, 0.0f };
-		DirectX::XMVECTOR up = { 0.0f, 1.0f, 0.0f, 0.0f };
-		DirectX::XMMATRIX lookAt;
+		void DrawReflectiveBubbles();
+		void DrawVertexCoral();
+		void DrawImplicitCoral();
+		void DrawTerrain();
+		void DrawGeometryCorals();
+		void DrawWater();
+		void DrawUnderWaterEffect();
+
+		void CreateBuffers();
+		void SetBuffers();
+		void UpdateBuffers();
+
+		void CreateBlendStates();
+		void CreateDepthStencils();
+		void CreateRasteriserStates();
+		void CreateSamplerState();
+		void CreateUnderwaterRenderTarget();
+
+		
 	};
 }
 

@@ -27,33 +27,41 @@ float Hash(float2 grid)
 	float h = dot(grid, float2 (127.1, 311.7));
 	return frac(sin(h)*43758.5453123);
 }
-
 float Noise(in float2 p)
 {
 	float2 grid = floor(p);
 	float2 f = frac(p);
-	float2 uv = f * f*(3.0 - 2.0*f);
-	float n1, n2, n3, n4;
-	n1 = Hash(grid + float2(0.0, 0.0));
-	n2 = Hash(grid + float2(1.0, 0.0));
-	n3 = Hash(grid + float2(0.0, 1.0));
-	n4 = Hash(grid + float2(1.0, 1.0));
-	n1 = lerp(n1, n2, uv.x);
-	n2 = lerp(n3, n4, uv.x);
-	n1 = lerp(n1, n2, uv.y);
-	return n1;//2*(2.0*n1 -1.0);
+	float2 uv = f * f * (3.0 - 2.0 * f);
+
+	float n1 = lerp(Hash(grid + float2(0.0, 0.0)), Hash(grid + float2(1.0, 0.0)), uv.x);
+	float n2 = lerp(Hash(grid + float2(0.0, 1.0)), Hash(grid + float2(1.0, 1.0)), uv.x);
+	return lerp(n1, n2, uv.y);
 }
 
 float fractalNoise(in float2 xy)
 {
-	float w = .7;
+	float w = 0.7;
 	float f = 0.0;
-	for (int i = 0; i < 4; i++)
-	{
-		f += Noise(xy) * w; w *= 0.5; xy *= 2.7;
-	}
+
+	f += Noise(xy) * w;
+	xy *= 2.7;
+	w *= 0.5;
+
+	f += Noise(xy) * w;
+	xy *= 2.7;
+	w *= 0.5;
+
+	f += Noise(xy) * w;
+	xy *= 2.7;
+	w *= 0.5;
+
+	f += Noise(xy) * w;
+
 	return f;
 }
+
+
+
 
 float4 main(PixelShaderInput input) : SV_TARGET
 {

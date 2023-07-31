@@ -54,7 +54,7 @@ float Noise(in float2 p)
 	n1 = lerp(n1, n2, uv.x); 
 	n2 = lerp(n3, n4, uv.x); 
 	n1 = lerp(n1, n2, uv.y); 
-	return n1;//2*(2.0*n1 -1.0);
+	return n1;
 }
 
 float fractalNoise(in float2 xy) 
@@ -87,7 +87,6 @@ PixelShaderInput main(Quad input, float2 UV : SV_DomainLocation, const OutputPat
 	output.norm = float4(N, 1.0);
 	output.posWorld = float4(uvPos, 1);
 	output.position = output.posWorld;
-	//output.posWorld = mul(output.posWorld, model);
 	output.position = mul(output.position, view);
 	output.position = mul(output.position, projection);
 

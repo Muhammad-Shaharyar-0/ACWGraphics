@@ -14,17 +14,10 @@ ACWMain::ACWMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
 	// Register to be notified if the Device is lost or recreated
 	m_deviceResources->RegisterDeviceNotify(this);
 
-	// TODO: Replace this with your app's content initialization.
 	m_sceneRenderer = std::unique_ptr<Sample3DSceneRenderer>(new Sample3DSceneRenderer(m_deviceResources));
 
 	m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
 
-	// TODO: Change the timer settings if you want something other than the default variable timestep fmode.
-	// e.g. for 60 FPS fixed timestep update logic, call:
-	/*
-	m_timer.SetFixedTimeStep(true);
-	m_timer.SetTargetElapsedSeconds(1.0 / 60);
-	*/
 }
 
 ACWMain::~ACWMain()
@@ -36,7 +29,6 @@ ACWMain::~ACWMain()
 // Updates application state when the window size changes (e.g. device orientation change)
 void ACWMain::CreateWindowSizeDependentResources() 
 {
-	// TODO: Replace this with the size-dependent initialization of your app's content.
 	m_sceneRenderer->CreateWindowSizeDependentResources();
 }
 
@@ -46,7 +38,6 @@ void ACWMain::Update(const std::vector<bool>& pInput)
 	// Update scene objects.
 	m_timer.Tick([&]()
 	{
-		// TODO: Replace this with your app's content update functions.
 		m_sceneRenderer->Update(m_timer, pInput);
 		m_fpsTextRenderer->Update(m_timer);
 	});
@@ -77,7 +68,6 @@ bool ACWMain::Render()
 	context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	// Render the scene objects.
-	// TODO: Replace this with your app's content rendering functions.
 	m_sceneRenderer->Render();
 	m_fpsTextRenderer->Render();
 

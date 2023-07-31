@@ -190,34 +190,6 @@ float4 RayTracing(Ray ray)
 	return colour;
 }
 
-//float4 RayCasting(Ray eyeRay)
-//{
-//	bool hit = false;
-//	float time = SphereIntersect(eyeRay, hit);
-//	float3 interP = eyeRay.origin + time * normalize(eyeRay.direction);
-//
-//	float4 RTColour = (float4)0;
-//
-//	if (!hit)
-//	{
-//		RTColour = backgroundColour;
-//	}
-//	else
-//	{
-//		float3 colour = lightColour.rgb;
-//		float3 normal = normalize(interP);
-//		normal = normalize(normal);
-//		float3 lightDir = normalize(lightPos - interP);
-//		float3 viewDir = normalize(eye.xyz - interP);
-//		float3 reflectedLight = reflect(-lightDir, normal);
-//		float reflection = max(0.5 * dot(normal, lightDir), 0.2);
-//		reflection += pow(max(0.1, dot(reflectedLight, viewDir)), 5.0);
-//		RTColour = float4(1.5 * reflection * colour, 1.0);
-//	}
-//	return RTColour;
-//}
-
-
 PixelShaderOutput main(VS_QUAD input)
 {
 	float zoom = 5.0;

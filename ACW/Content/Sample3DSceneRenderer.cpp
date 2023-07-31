@@ -281,12 +281,16 @@ void Sample3DSceneRenderer::Render()
 	mContext->OMSetRenderTargets(1, targets, m_deviceResources->GetDepthStencilView());
 
 
+	DrawVertexCoral();
+
 	//Draw ray casted effects
 	DrawReflectiveBubbles();
 
 	//DrawImplicitShapes();
 	DrawImplicitCoral();
 	//DrawFractals();
+
+
 
 	//Set linelist topology and draw snakes
 	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
@@ -341,6 +345,30 @@ void ACW::Sample3DSceneRenderer::DrawReflectiveBubbles()
 	);
 
 	// Draw the objects.
+	mContext->DrawIndexed(
+		m_indexCount,
+		0,
+		0
+	);
+}
+
+void ACW::Sample3DSceneRenderer::DrawVertexCoral()
+{
+	// Attach our vertex shader.
+	mContext->VSSetShader(
+		m_vertexShaderVertexCoral.Get(),
+		nullptr,
+		0
+	);
+
+	// Attach our pixel shader.
+	mContext->PSSetShader(
+		m_pixelShaderVertexCoral.Get(),
+		nullptr,
+		0
+	);
+
+	//Draw the objects.
 	mContext->DrawIndexed(
 		m_indexCount,
 		0,
@@ -904,6 +932,11 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	auto loadVSTaskUnderwater = DX::ReadDataAsync(L"SampleVertexShader.cso");
 	auto loadPSTaskUnderwater = DX::ReadDataAsync(L"SamplePixelShader.cso");
 
+	auto loadVSTaskVertexCoral= DX::ReadDataAsync(L"CoralVertexShader.cso");
+	auto loadPSTaskVertexCoral = DX::ReadDataAsync(L"CoralPixelShader.cso");
+
+	
+
 #pragma region Implicit primitives
 
 	//After the vertex shader file is loaded, create the shader.
@@ -1148,11 +1181,40 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 
 #pragma endregion
 
+#pragma region Vertex Coral
+
+	//After the vertex shader file is loaded, create the shader
+	auto VertexCoralVSTask = loadVSTaskVertexCoral.then([this](const std::vector<byte>& fileData) {
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreateVertexShader(
+				&fileData[0],
+				fileData.size(),
+				nullptr,
+				&m_vertexShaderVertexCoral
+			)
+		);
+		});
+
+	//After the pixel shader file is loaded, create the shader
+	auto VertexCoralPSTask = loadPSTaskVertexCoral.then([this](const std::vector<byte>& fileData) {
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreatePixelShader(
+				&fileData[0],
+				fileData.size(),
+				nullptr,
+				&m_pixelShaderVertexCoral
+			)
+		);
+		});
+
+
+#pragma endregion
+
 	//Once the shaders using the cube vertices are loaded, load the cube vertices
 	auto createCubeTask = (ImplicitPrimitivesPSTask && ImplicitPrimitivesVSTask
 		&& TerrainVSTask && TerrainPSTask && TerrainDSTask && TerrainHSTask
 		&& WaterVSTask && WaterPSTask && WaterDSTask && WaterHSTask
-		&& SpheresVSTask && SpheresPSTask).then([this]() {
+		&& SpheresVSTask && SpheresPSTask && VertexCoralVSTask && VertexCoralPSTask).then([this]() {
 
 		static const Vertex cubeVertices[] =
 		{

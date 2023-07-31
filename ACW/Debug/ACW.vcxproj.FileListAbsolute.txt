@@ -45,7 +45,6 @@ C:\HLSL-Graphics-Effects\ACWGraphics\ACW\Debug\ProjectArchitectures.txt
 F:\ACWGraphics\Debug\ACW\resources.pri
 F:\ACWGraphics\Debug\ACW\AppxManifest.xml
 F:\ACWGraphics\Debug\ACW\ACW.build.appxrecipe
-F:\ACWGraphics\ACW\Debug\ACW.vcxproj.AssemblyReference.cache
 F:\ACWGraphics\ACW\Debug\ResourceHandlingTask.state
 F:\ACWGraphics\ACW\Debug\ACW.vcxproj.GenerateResource.Cache
 F:\ACWGraphics\ACW\Debug\priconfig.xml

@@ -29,159 +29,127 @@
     <AppXManifest Include="F:\ACWGraphics\Debug\ACW\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-31T00:30:30.902</Modified>
+      <Modified>2023-07-31T02:09:17.200</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ACW.exe">
       <PackagePath>ACW.exe</PackagePath>
-      <Modified>2023-07-31T00:30:30.793</Modified>
+      <Modified>2023-07-31T01:58:39.588</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ACW.winmd">
       <PackagePath>ACW.winmd</PackagePath>
-      <Modified>2023-07-27T20:18:12.020</Modified>
+      <Modified>2023-07-31T01:55:01.115</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\CoralPixelShader.cso">
+      <PackagePath>CoralPixelShader.cso</PackagePath>
+      <Modified>2023-07-31T01:57:25.541</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\CoralVertexShader.cso">
+      <PackagePath>CoralVertexShader.cso</PackagePath>
+      <Modified>2023-07-31T02:09:17.108</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesPixel.cso">
       <PackagePath>ImplicitPrimitivesPixel.cso</PackagePath>
-      <Modified>2023-07-27T23:01:17.915</Modified>
+      <Modified>2023-07-31T01:54:57.161</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesVertex.cso">
       <PackagePath>ImplicitPrimitivesVertex.cso</PackagePath>
-      <Modified>2023-07-27T23:01:17.962</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitShapesPixel.cso">
-      <PackagePath>ImplicitShapesPixel.cso</PackagePath>
-      <Modified>2023-07-27T20:21:03.087</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitShapesVertex.cso">
-      <PackagePath>ImplicitShapesVertex.cso</PackagePath>
-      <Modified>2023-07-27T20:21:03.151</Modified>
+      <Modified>2023-07-31T01:54:57.208</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantGeometry.cso">
       <PackagePath>PlantGeometry.cso</PackagePath>
-      <Modified>2023-07-28T00:05:51.006</Modified>
+      <Modified>2023-07-31T01:54:57.254</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantPixel.cso">
       <PackagePath>PlantPixel.cso</PackagePath>
-      <Modified>2023-07-28T00:18:44.123</Modified>
+      <Modified>2023-07-31T01:54:57.317</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantVertex.cso">
       <PackagePath>PlantVertex.cso</PackagePath>
-      <Modified>2023-07-27T22:41:55.699</Modified>
+      <Modified>2023-07-31T01:54:57.364</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SamplePixelShader.cso">
       <PackagePath>SamplePixelShader.cso</PackagePath>
-      <Modified>2023-07-28T02:46:50.819</Modified>
+      <Modified>2023-07-31T01:54:57.411</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
-      <Modified>2023-07-28T02:44:07.213</Modified>
+      <Modified>2023-07-31T01:54:57.473</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ShinySphereRayTracerPixel.cso">
       <PackagePath>ShinySphereRayTracerPixel.cso</PackagePath>
-      <Modified>2023-07-27T23:46:14.274</Modified>
+      <Modified>2023-07-31T01:54:57.551</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ShinySphereRayTracerVertex.cso">
       <PackagePath>ShinySphereRayTracerVertex.cso</PackagePath>
-      <Modified>2023-07-27T23:03:51.218</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\FractalsPixel.cso">
-      <PackagePath>FractalsPixel.cso</PackagePath>
-      <Modified>2023-07-27T20:21:03.948</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\FractalsVertex.cso">
-      <PackagePath>FractalsVertex.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.008</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeGeometry.cso">
-      <PackagePath>SnakeGeometry.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.083</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeGeometry2.cso">
-      <PackagePath>SnakeGeometry2.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.154</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakePixel.cso">
-      <PackagePath>SnakePixel.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.222</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakePixel2.cso">
-      <PackagePath>SnakePixel2.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.292</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeVertex.cso">
-      <PackagePath>SnakeVertex.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.357</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeVertex2.cso">
-      <PackagePath>SnakeVertex2.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.422</Modified>
+      <Modified>2023-07-31T01:54:57.598</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainDomain.cso">
       <PackagePath>TerrainDomain.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.498</Modified>
+      <Modified>2023-07-31T01:54:57.661</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainHull.cso">
       <PackagePath>TerrainHull.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.560</Modified>
+      <Modified>2023-07-31T01:54:57.708</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainPixel.cso">
       <PackagePath>TerrainPixel.cso</PackagePath>
-      <Modified>2023-07-28T02:59:57.626</Modified>
+      <Modified>2023-07-31T01:54:57.770</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainVertex.cso">
       <PackagePath>TerrainVertex.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.692</Modified>
+      <Modified>2023-07-31T01:54:57.801</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\WaterDomain.cso">
       <PackagePath>WaterDomain.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.766</Modified>
+      <Modified>2023-07-31T01:54:57.864</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\WaterHull.cso">
       <PackagePath>WaterHull.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.826</Modified>
+      <Modified>2023-07-31T01:54:57.911</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\WaterPixel.cso">
       <PackagePath>WaterPixel.cso</PackagePath>
-      <Modified>2023-07-27T23:47:13.186</Modified>
+      <Modified>2023-07-31T01:54:57.973</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\WaterVertex.cso">
       <PackagePath>WaterVertex.cso</PackagePath>
-      <Modified>2023-07-27T20:21:04.952</Modified>
+      <Modified>2023-07-31T01:54:58.005</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2023-07-27T20:18:11.184</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.184</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.185</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.186</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.186</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.187</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-07-27T20:18:11.188</Modified>
+      <Modified>2019-04-23T03:45:18.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\ACW\grass.dds">
       <PackagePath>grass.dds</PackagePath>
@@ -193,7 +161,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-07-28T01:57:46.425</Modified>
+      <Modified>2023-07-31T01:57:27.245</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

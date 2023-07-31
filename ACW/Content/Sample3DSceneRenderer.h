@@ -21,6 +21,7 @@ namespace ACW
 
 	private:
 		void DrawReflectiveBubbles();
+		void DrawVertexCoral();
 		void DrawImplicitCoral();
 		void DrawTerrain();
 		void DrawGeometryCorals();
@@ -49,6 +50,8 @@ namespace ACW
 		//Cube vertices/indices
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_vertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		m_indexBuffer;
+
+
 		Microsoft::WRL::ComPtr<ID3D11Buffer> m_fullScreenQuadVertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> m_fullScreenQuadIndexBuffer;
 
@@ -59,6 +62,10 @@ namespace ACW
 		//Implicit primitives shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderImplicitPrimitives;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderImplicitPrimitives;
+
+		//Implicit primitives shaders
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderVertexCoral;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderVertexCoral;
 
 		//Terrain shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderTerrain;

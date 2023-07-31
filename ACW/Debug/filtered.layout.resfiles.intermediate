@@ -6,12 +6,10 @@ Assets\Square44x44Logo.targetsize-24_altform-unplated.png
 Assets\StoreLogo.png
 Assets\Wide310x150Logo.scale-200.png
 grass.dds
-FractalsPixel.cso
-FractalsVertex.cso
+CoralPixelShader.cso
+CoralVertexShader.cso
 ImplicitPrimitivesPixel.cso
 ImplicitPrimitivesVertex.cso
-ImplicitShapesPixel.cso
-ImplicitShapesVertex.cso
 PlantGeometry.cso
 PlantPixel.cso
 PlantVertex.cso
@@ -19,12 +17,6 @@ SamplePixelShader.cso
 SampleVertexShader.cso
 ShinySphereRayTracerPixel.cso
 ShinySphereRayTracerVertex.cso
-SnakeGeometry.cso
-SnakeGeometry2.cso
-SnakePixel.cso
-SnakePixel2.cso
-SnakeVertex.cso
-SnakeVertex2.cso
 TerrainDomain.cso
 TerrainHull.cso
 TerrainPixel.cso

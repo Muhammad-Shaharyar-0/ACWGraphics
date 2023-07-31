@@ -31,17 +31,17 @@
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ACW.winmd">
       <PackagePath>ACW.winmd</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\CoralPixelShader.cso">
+      <PackagePath>CoralPixelShader.cso</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\CoralVertexShader.cso">
+      <PackagePath>CoralVertexShader.cso</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesPixel.cso">
       <PackagePath>ImplicitPrimitivesPixel.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitPrimitivesVertex.cso">
       <PackagePath>ImplicitPrimitivesVertex.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitShapesPixel.cso">
-      <PackagePath>ImplicitShapesPixel.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ImplicitShapesVertex.cso">
-      <PackagePath>ImplicitShapesVertex.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\PlantGeometry.cso">
       <PackagePath>PlantGeometry.cso</PackagePath>
@@ -63,30 +63,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\ShinySphereRayTracerVertex.cso">
       <PackagePath>ShinySphereRayTracerVertex.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\FractalsPixel.cso">
-      <PackagePath>FractalsPixel.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\FractalsVertex.cso">
-      <PackagePath>FractalsVertex.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeGeometry.cso">
-      <PackagePath>SnakeGeometry.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeGeometry2.cso">
-      <PackagePath>SnakeGeometry2.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakePixel.cso">
-      <PackagePath>SnakePixel.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakePixel2.cso">
-      <PackagePath>SnakePixel2.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeVertex.cso">
-      <PackagePath>SnakeVertex.cso</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\SnakeVertex2.cso">
-      <PackagePath>SnakeVertex2.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\ACWGraphics\Debug\ACW\TerrainDomain.cso">
       <PackagePath>TerrainDomain.cso</PackagePath>

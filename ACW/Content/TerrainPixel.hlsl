@@ -68,18 +68,6 @@ float4 main(PixelShaderInput input) : SV_TARGET
 	float4 materialSpecular = 0;
 	float4 texColour = 0;
 
-	//if (input.posWorld.y < 0.5)
-	//{
-	//	materialDiffuse = float4(0.8, 0.5, 0.25, 1.0);
-	//	materialSpecular = float4(0.3, 0.2, 0.1, 1.0);
-	//	texColour = float4(1.0, 0.7, 0.3, 1.0) * fractalNoise(input.posWorld.xz);
-	//}
-	//else
-	//{
-	//	materialDiffuse = float4(0.4, 0.8, 0.4, 1.0);
-	//	materialSpecular = float4(0.2, 0.3, 0.1, 1.0);
-	//	texColour = float4(0.4, 1.0, 0.1, 1.0) * fractalNoise(input.posWorld.xz);
-	//}
 	materialDiffuse = float4(0.8, 0.5, 0.25, 1.0);
 	materialSpecular = float4(0.3, 0.2, 0.1, 1.0);
 	texColour = float4(1.0, 0.7, 0.3, 1.0) * fractalNoise(input.posWorld.xz);

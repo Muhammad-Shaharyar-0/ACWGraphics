@@ -26,16 +26,6 @@ VertexOutput main(VertexShaderInput input)
 	
 	VertexOutput output;
 
-	//float4 pos = float4(input.pos, 1.0f);
-
-	//// Transform the vertex position into projected space.
-	//pos = mul(pos, model);
-	//pos = mul(pos, view);
-	//pos = mul(pos, projection);
-
-	//output.position = pos;
-
-
 	output.position = float4(input.pos, 1.0f);
 	output.cameraPosition = eye.xyz;
 

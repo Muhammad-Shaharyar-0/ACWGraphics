@@ -20,10 +20,10 @@ namespace ACW
 		void Render();
 
 	private:
-		void DrawSpheres();
-		void DrawImplicitPrimitives();
+		void DrawReflectiveBubbles();
+		void DrawImplicitCoral();
 		void DrawTerrain();
-		void DrawPlants();
+		void DrawGeometryCorals();
 		void DrawWater();
 		void DrawUnderWaterEffect();
 
@@ -56,16 +56,6 @@ namespace ACW
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mPlantVertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mPlantIndexBuffer;
 
-		//Snake vertices/indices
-		Microsoft::WRL::ComPtr<ID3D11Buffer> mSnakeVertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> mSnakeIndexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> mSnakeVertexBuffer2;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> mSnakeIndexBuffer2;
-
-		//Implicit shapes shaders
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderImplicitShapes;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderImplicitShapes;
-
 		//Implicit primitives shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader>	m_vertexShaderImplicitPrimitives;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader>	m_pixelShaderImplicitPrimitives;
@@ -88,18 +78,6 @@ namespace ACW
 		//Underwater shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderUnderwater;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderUnderwater;
-
-		//Snake shaders
-		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderSnakes;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderSnakes;
-		Microsoft::WRL::ComPtr<ID3D11GeometryShader> mGeometryShaderSnakes;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderSnakes2;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderSnakes2;
-		Microsoft::WRL::ComPtr<ID3D11GeometryShader> mGeometryShaderSnakes2;
-
-		//Fractal shaders
-		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderFractals;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader> mPixelShaderFractals;
 
 		//Water shaders
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> mVertexShaderWater;

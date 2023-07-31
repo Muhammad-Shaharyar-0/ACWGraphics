@@ -282,10 +282,10 @@ void Sample3DSceneRenderer::Render()
 
 
 	//Draw ray casted effects
-	DrawSpheres();
+	DrawReflectiveBubbles();
 
 	//DrawImplicitShapes();
-	DrawImplicitPrimitives();
+	DrawImplicitCoral();
 	//DrawFractals();
 
 	//Set linelist topology and draw snakes
@@ -299,7 +299,7 @@ void Sample3DSceneRenderer::Render()
 
 	//Set pointlist topology and draw plants
 	mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-	DrawPlants();
+	DrawGeometryCorals();
 
 
 	DrawUnderWaterEffect();
@@ -317,7 +317,7 @@ void Sample3DSceneRenderer::Render()
 /// <summary>
 /// 
 /// </summary>
-void ACW::Sample3DSceneRenderer::DrawSpheres()
+void ACW::Sample3DSceneRenderer::DrawReflectiveBubbles()
 {
 	// Attach our vertex shader.
 	mContext->VSSetShader(
@@ -423,7 +423,7 @@ void ACW::Sample3DSceneRenderer::DrawUnderWaterEffect()
 /// <summary>
 /// 
 /// </summary>
-void ACW::Sample3DSceneRenderer::DrawImplicitPrimitives()
+void ACW::Sample3DSceneRenderer::DrawImplicitCoral()
 {
 	// Attach our vertex shader.
 	mContext->VSSetShader(
@@ -516,7 +516,7 @@ void ACW::Sample3DSceneRenderer::DrawTerrain()
 /// <summary>
 /// 
 /// </summary>
-void ACW::Sample3DSceneRenderer::DrawPlants()
+void ACW::Sample3DSceneRenderer::DrawGeometryCorals()
 {
 	// Each vertex is one instance of the Vertex struct.
 	UINT stride = sizeof(Vertex);
@@ -876,10 +876,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	CreateUnderwaterRenderTarget();
 
 	//Load shaders asynchronously
-	//Implicit shapes shaders
-	auto loadVSTask = DX::ReadDataAsync(L"ImplicitShapesVertex.cso");
-	auto loadPSTask = DX::ReadDataAsync(L"ImplicitShapesPixel.cso");
-
 	//Implicit primitives shaders
 	auto loadVSTaskPrimitives = DX::ReadDataAsync(L"ImplicitPrimitivesVertex.cso");
 	auto loadPSTaskPrimitives = DX::ReadDataAsync(L"ImplicitPrimitivesPixel.cso");
@@ -908,31 +904,18 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	auto loadVSTaskUnderwater = DX::ReadDataAsync(L"SampleVertexShader.cso");
 	auto loadPSTaskUnderwater = DX::ReadDataAsync(L"SamplePixelShader.cso");
 
-	//Snakes shaders
-	auto loadVSTaskSnakes = DX::ReadDataAsync(L"SnakeVertex.cso");
-	auto loadPSTaskSnakes = DX::ReadDataAsync(L"SnakePixel.cso");
-	auto loadGSTaskSnakes = DX::ReadDataAsync(L"SnakeGeometry.cso");
-	auto loadVSTaskSnakes2 = DX::ReadDataAsync(L"SnakeVertex2.cso");
-	auto loadPSTaskSnakes2 = DX::ReadDataAsync(L"SnakePixel2.cso");
-	auto loadGSTaskSnakes2 = DX::ReadDataAsync(L"SnakeGeometry2.cso");
+#pragma region Implicit primitives
 
-	//Sierpinski shaders
-	auto loadVSTaskFractals = DX::ReadDataAsync(L"FractalsVertex.cso");
-	auto loadPSTaskFractals = DX::ReadDataAsync(L"FractalsPixel.cso");
-
-#pragma region Implicit shapes
-
-	//After the vertex shader file is loaded, create the shader and input layout.
-	auto ImplicitShapesVSTask = loadVSTask.then([this](const std::vector<byte>& fileData) {
+	//After the vertex shader file is loaded, create the shader.
+	auto ImplicitPrimitivesVSTask = loadVSTaskPrimitives.then([this](const std::vector<byte>& fileData) {
 		DX::ThrowIfFailed(
 			m_deviceResources->GetD3DDevice()->CreateVertexShader(
 				&fileData[0],
 				fileData.size(),
 				nullptr,
-				&m_vertexShaderImplicitShapes
+				&m_vertexShaderImplicitPrimitives
 			)
 		);
-
 		//Input layout
 		static const D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
 		{
@@ -951,34 +934,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	});
 
 	//After the pixel shader file is loaded, create the shader.
-	auto ImplicitShapesPSTask = loadPSTask.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreatePixelShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&m_pixelShaderImplicitShapes
-			)
-		);
-	});
-
-#pragma endregion
-
-#pragma region Implicit primitives
-
-	//After the vertex shader file is loaded, create the shader.
-	auto ImplicitPrimitivesVSTask = loadVSTaskPrimitives.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateVertexShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&m_vertexShaderImplicitPrimitives
-			)
-		);
-	});
-
-	//After the pixel shader file is loaded, create the shader.
 	auto ImplicitPrimitivesPSTask = loadPSTaskPrimitives.then([this](const std::vector<byte>& fileData) {
 		DX::ThrowIfFailed(
 			m_deviceResources->GetD3DDevice()->CreatePixelShader(
@@ -990,32 +945,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		);
 	});
 
-#pragma endregion
-
-#pragma region Fractals
-	//After the vertex shader file is loaded, create the shader
-	auto FractalsVSTask = loadVSTaskFractals.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateVertexShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mVertexShaderFractals
-			)
-		);
-	});
-
-	//After the pixel shader file is loaded, create the shader
-	auto FractalsPSTask = loadPSTaskFractals.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreatePixelShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mPixelShaderFractals
-			)
-		);
-	});
 #pragma endregion
 
 #pragma region Terrain
@@ -1187,86 +1116,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 	});
 #pragma endregion
 
-#pragma region Snakes
-	//After the vertex shader file is loaded, create the shader
-	auto SnakesVSTask = loadVSTaskSnakes.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateVertexShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mVertexShaderSnakes
-			)
-		);
-	});
-
-	//After the pixel shader file is loaded, create the shader
-	auto SnakesPSTask = loadPSTaskSnakes.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreatePixelShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mPixelShaderSnakes
-			)
-		);
-	});
-
-	//After the geometry shader file is loaded, create the shader
-	auto SnakesGSTask = loadGSTaskSnakes.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateGeometryShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mGeometryShaderSnakes
-			)
-		);
-	});
-
-	//After the vertex shader file is loaded, create the shader
-	auto SnakesVSTask2 = loadVSTaskSnakes2.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateVertexShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mVertexShaderSnakes2
-			)
-		);
-	});
-
-	//After the pixel shader file is loaded, create the shader
-	auto SnakesPSTask2 = loadPSTaskSnakes2.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreatePixelShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mPixelShaderSnakes2
-			)
-		);
-	});
-
-	//After the geometry shader file is loaded, create the shader
-	auto SnakesGSTask2 = loadGSTaskSnakes2.then([this](const std::vector<byte>& fileData) {
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateGeometryShader(
-				&fileData[0],
-				fileData.size(),
-				nullptr,
-				&mGeometryShaderSnakes2
-			)
-		);
-	});
-
-	//auto loadUnderwaterTextureTask = DX::ReadDataAsync(L"grass.dds").then([this](const std::vector<byte>& fileData) {
-	//	DX::ThrowIfFailed(
-	//		CreateDDSTextureFromMemory(m_deviceResources->GetD3DDevice(), &fileData[0], fileData.size(), nullptr, mUnderwaterTexture.GetAddressOf())
-	//	);
-	//	});
-
-#pragma endregion
 #pragma region UnderWater
 
 	//After the vertex shader file is loaded, create the shader
@@ -1300,12 +1149,10 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 #pragma endregion
 
 	//Once the shaders using the cube vertices are loaded, load the cube vertices
-	auto createCubeTask = (ImplicitShapesPSTask && ImplicitShapesVSTask
-		&& ImplicitPrimitivesPSTask && ImplicitPrimitivesVSTask
+	auto createCubeTask = (ImplicitPrimitivesPSTask && ImplicitPrimitivesVSTask
 		&& TerrainVSTask && TerrainPSTask && TerrainDSTask && TerrainHSTask
 		&& WaterVSTask && WaterPSTask && WaterDSTask && WaterHSTask
-		&& SpheresVSTask && SpheresPSTask
-		&& FractalsVSTask && FractalsPSTask).then([this]() {
+		&& SpheresVSTask && SpheresPSTask).then([this]() {
 
 		static const Vertex cubeVertices[] =
 		{
@@ -1466,98 +1313,10 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		);
 	});
 
-	//Once the shaders using the snake vertices are loaded, load the snake vertices
-	auto createSnakesTask = (SnakesVSTask && SnakesPSTask && SnakesGSTask).then([this]() {
 
-		static std::vector<Vertex> snakeVertices;
-		static std::vector<unsigned short> snakeIndices;
-
-		for (int i = 1; i < 10; i++)
-		{
-			snakeVertices.emplace_back(Vertex{ XMFLOAT3((float)i - 0.5, 0, 0) });
-		}
-
-		for (int i = 0; i < snakeVertices.size(); i++)
-		{
-			snakeIndices.push_back(i);
-		}
-
-		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
-		vertexBufferData.pSysMem = &(snakeVertices[0]);
-		vertexBufferData.SysMemPitch = 0;
-		vertexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(Vertex) * snakeVertices.size(), D3D11_BIND_VERTEX_BUFFER);
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateBuffer(
-				&vertexBufferDesc,
-				&vertexBufferData,
-				&mSnakeVertexBuffer
-			)
-		);
-
-		mSnakeIndex = snakeIndices.size();
-
-		D3D11_SUBRESOURCE_DATA indexBufferData = { 0 };
-		indexBufferData.pSysMem = &(snakeIndices[0]);
-		indexBufferData.SysMemPitch = 0;
-		indexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC indexBufferDesc(sizeof(unsigned short) * snakeIndices.size(), D3D11_BIND_INDEX_BUFFER);
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateBuffer(
-				&indexBufferDesc,
-				&indexBufferData,
-				&mSnakeIndexBuffer
-			)
-		);
-	});
-
-	//Once the shaders using the snake vertices are loaded, load the snake vertices
-	auto createSnakesTask2 = (SnakesVSTask2 && SnakesPSTask2 && SnakesGSTask2).then([this]() {
-
-		static std::vector<Vertex> snakeVertices;
-		static std::vector<unsigned short> snakeIndices;
-
-		for (int i = 1; i < 10; i++)
-		{
-			snakeVertices.emplace_back(Vertex{ XMFLOAT3(0, 0, (float)i - 0.5) });
-		}
-
-		for (int i = 0; i < snakeVertices.size(); i++)
-		{
-			snakeIndices.push_back(i);
-		}
-
-		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
-		vertexBufferData.pSysMem = &(snakeVertices[0]);
-		vertexBufferData.SysMemPitch = 0;
-		vertexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(Vertex) * snakeVertices.size(), D3D11_BIND_VERTEX_BUFFER);
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateBuffer(
-				&vertexBufferDesc,
-				&vertexBufferData,
-				&mSnakeVertexBuffer2
-			)
-		);
-
-		mSnakeIndex = snakeIndices.size();
-
-		D3D11_SUBRESOURCE_DATA indexBufferData = { 0 };
-		indexBufferData.pSysMem = &(snakeIndices[0]);
-		indexBufferData.SysMemPitch = 0;
-		indexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC indexBufferDesc(sizeof(unsigned short) * snakeIndices.size(), D3D11_BIND_INDEX_BUFFER);
-		DX::ThrowIfFailed(
-			m_deviceResources->GetD3DDevice()->CreateBuffer(
-				&indexBufferDesc,
-				&indexBufferData,
-				&mSnakeIndexBuffer2
-			)
-		);
-	});
 
 	//Once all vertices are loaded, set buffers and set loading complete to true
-	auto complete = (createCubeTask && createPlantsTask && createSnakesTask && createSnakesTask2).then([this]() {
+	auto complete = (createCubeTask && createPlantsTask ).then([this]() {
 		SetBuffers();
 		m_loadingComplete = true;
 	});
@@ -1569,9 +1328,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 void Sample3DSceneRenderer::ReleaseDeviceDependentResources()
 {
 	m_loadingComplete = false;
-	m_vertexShaderImplicitShapes.Reset();
 	m_inputLayout.Reset();
-	m_pixelShaderImplicitShapes.Reset();
 	m_constantBufferCamera.Reset();
 	m_vertexBuffer.Reset();
 	m_indexBuffer.Reset();
